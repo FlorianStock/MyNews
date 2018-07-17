@@ -1,6 +1,14 @@
 package com.mynews.flooo.mynews;
 
+import android.support.annotation.Nullable;
+
+import com.mynews.flooo.mynews.ApiRest.ApiCalls;
+
+
+import org.junit.Before;
 import org.junit.Test;
+
+import java.util.List;
 
 import static org.junit.Assert.*;
 
@@ -9,12 +17,23 @@ import static org.junit.Assert.*;
  *
  * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
  */
-public class ExampleUnitTest
+public class NewsModelTest // implements ApiCalls.Callbacks
 {
+
+
+
+    @Before
+    public void setUp() throws Exception
+    {
+
+        //ApiCalls.getTopStories(this);
+    }
+
     @Test
     public void addition_isCorrect()
     {
 
-        assertEquals(4, 2 + 2);
     }
+
+
 }

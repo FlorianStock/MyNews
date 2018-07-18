@@ -1,25 +1,35 @@
 package com.mynews.flooo.mynews;
 
 
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.mynews.flooo.mynews.ApiRest.FormatDataImage;
 import com.mynews.flooo.mynews.ApiRest.News;
 import com.mynews.flooo.mynews.ApiRest.ObjectResults;
+import com.squareup.picasso.Picasso;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class AdapterRecyclerView extends RecyclerView.Adapter<AdapterRecyclerView.MyViewHolder>
 {
 
 
+    private Context context;
     private ObjectResults objectResults;
 
-    public AdapterRecyclerView(ObjectResults obj)
+    public AdapterRecyclerView(ObjectResults obj,Context context)
     {
         this.objectResults = obj;
+        this.context = context;
     }
 
 
@@ -54,7 +64,8 @@ public class AdapterRecyclerView extends RecyclerView.Adapter<AdapterRecyclerVie
 
         private  TextView name;
         private  TextView description;
-
+        private ImageView imageIcon;
+        private TextView dateText;
 
 
         public MyViewHolder(final View itemView)
@@ -63,6 +74,8 @@ public class AdapterRecyclerView extends RecyclerView.Adapter<AdapterRecyclerVie
 
             name = itemView.findViewById(R.id.folder);
             description = itemView.findViewById(R.id.description);
+            imageIcon = itemView.findViewById(R.id.imageViewIcon);
+            dateText = itemView.findViewById(R.id.date);
 
          /*   itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -75,14 +88,44 @@ public class AdapterRecyclerView extends RecyclerView.Adapter<AdapterRecyclerVie
             }); */
         }
 
-        public void updateView(News displayList)
-        {
-            Log.e("CallBackOnSuccess", displayList.getTitle());
+        public void updateView(News displayList)  {
 
+            String textFolder = displayList.getSection();
 
-            String textFolder = displayList.getSection()+" > "+displayList.getSubsection();
+            if(!displayList.getSubsection().equals(""))
+            {
+                textFolder = displayList.getSection()+" > "+displayList.getSubsection();
+            }
+
             name.setText(textFolder);
             description.setText(displayList.getTitle());
+
+
+            try
+            {
+                SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssX");
+                SimpleDateFormat formatDisplay = new SimpleDateFormat("dd/MM/yyyy");
+                Date date = format.parse(displayList.getDate());
+                String currentDateandTime = formatDisplay.format(date);
+                dateText.setText(currentDateandTime);
+
+            }
+            catch(ParseException e)
+            {
+                System.out.println(e);
+            }
+
+            for(FormatDataImage dataImage: displayList)
+            {
+
+
+
+                    if (dataImage.getFormat().equals("Standard Thumbnail"))
+                    {
+                        Picasso.with(context).load(dataImage.getUrl()).into(imageIcon);
+                    }
+
+            }
 
         }
     }

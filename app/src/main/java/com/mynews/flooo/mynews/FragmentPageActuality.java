@@ -86,7 +86,7 @@ public class FragmentPageActuality extends Fragment implements ApiCalls.Callback
         //ApiCalls.fetchUserFollowing(this, "JakeWharton");
         ApiCalls.getTopStories(this);
 
-        this.adapterRecyclerView = new AdapterRecyclerView(this.listnews);
+        this.adapterRecyclerView = new AdapterRecyclerView(this.listnews,this.getContext());
         recyclerView.setAdapter(this.adapterRecyclerView);
 
         // Inflate the layout for this fragment

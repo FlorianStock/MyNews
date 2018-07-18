@@ -1,11 +1,9 @@
 package com.mynews.flooo.mynews.ApiRest;
 
-import com.google.gson.annotations.Expose;
-import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;
 
-public class News
+public class News extends ArrayList<FormatDataImage>
 {
 
 
@@ -14,10 +12,8 @@ public class News
     private  String title;
     private  String url;
     private  String date;
-    private  ArrayList ImageData;
 
 
-    public ArrayList getImageData(){return ImageData;}
     public String getDate(){return date;}
     public String getUrl(){return url;}
     public String getSubsection(){return subsection;}
@@ -29,5 +25,5 @@ public class News
     public void setUrl(String url){this.url=url;}
     public void setTitle(String title){this.title=title;}
     public void setDate(String date){this.date=date;}
-    public void setImageData(ArrayList ImageData){this.ImageData=ImageData;}
+
 }

@@ -12,16 +12,23 @@ import retrofit2.Call;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.http.GET;
+import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 public interface ApiInterfaceEndPoints
 {
+    // Top stories
+    @GET("svc/topstories/v2/{section}.json")
+    Call<Results>getTopStories(@Path("section") String section,
+                                @Query("api-key") String API_KEY);
 
-    @GET("svc/topstories/v2/home.json")
-    Call <ObjectResults> getTopStories(@Query("api-key") String API_KEY);
+    // Most Popular API
+    @GET("svc/mostpopular/v2/mostshared/all-sections/30.json")
+    Call<Results> getMostPopular(@Query("api-key") String apiKey);
+
 
     Gson gson = new GsonBuilder()
-            .registerTypeAdapter(ObjectResults.class, new GsonAdapterLists())
+            .registerTypeAdapter(Results.class, new GsonAdapterLists())
             .setDateFormat(DateFormat.LONG)
             .setFieldNamingPolicy(FieldNamingPolicy.UPPER_CAMEL_CASE)
             .setPrettyPrinting()

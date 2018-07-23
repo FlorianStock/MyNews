@@ -10,14 +10,15 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 
-public class ApiCalls {
+public class ApiCalls
+{
 
         private static final String API_KEY = "f06e19cbd14d467d9f345b263f9c3cfe";
 
         // 1 - Creating a callback
         public interface Callbacks
         {
-            void onResponse(@Nullable ObjectResults listnews);
+            void onResponse(@Nullable Results listNews);
             void onFailure();
         }
 
@@ -26,29 +27,45 @@ public class ApiCalls {
 
         public  static void getTopStories(Callbacks callbacks)
         {
-            final WeakReference<Callbacks> callbacksWeakReference = new WeakReference<Callbacks>(callbacks);
 
             ApiInterfaceEndPoints apiInterfaceEndPoints = ApiInterfaceEndPoints.retrofit.create(ApiInterfaceEndPoints.class);
-            Call <ObjectResults> call = apiInterfaceEndPoints.getTopStories(API_KEY);
+            Call <Results> call = apiInterfaceEndPoints.getTopStories("home",API_KEY);
+            EnqueueCall(call,callbacks);
+        }
+        public  static void getMostPopular(Callbacks callbacks)
+        {
+            ApiInterfaceEndPoints apiInterfaceEndPoints = ApiInterfaceEndPoints.retrofit.create(ApiInterfaceEndPoints.class);
+            Call <Results> call = apiInterfaceEndPoints.getMostPopular(API_KEY);
+            EnqueueCall(call,callbacks);
+        }
+        public  static void getSection(Callbacks callbacks,String section)
+        {
+            ApiInterfaceEndPoints apiInterfaceEndPoints = ApiInterfaceEndPoints.retrofit.create(ApiInterfaceEndPoints.class);
+            Call <Results> call = apiInterfaceEndPoints.getTopStories(section,API_KEY);
+            EnqueueCall(call,callbacks);
+        }
 
-            call.enqueue(new Callback <ObjectResults>()
+        private static void EnqueueCall(Call call, Callbacks callbacks )
+        {
+            final WeakReference<Callbacks> callbacksWeakReference = new WeakReference<Callbacks>(callbacks);
+
+            call.enqueue(new Callback <Results>()
             {
 
                 @Override
-                public void onResponse(Call<ObjectResults> call, Response<ObjectResults>response)
+                public void onResponse(Call<Results> call, Response<Results>response)
                 {
                     // 2.5 - Call the proper callback used in controller (MainFragment)
-
-
                     if (callbacksWeakReference.get() != null)
                     {
+                        //System.out.println(response.body().getNumResults());
                         callbacksWeakReference.get().onResponse(response.body());
                         Log.e("CallBackOnSucess", "Sucess JSON PARSE");
                     }
                 }
 
                 @Override
-                public void onFailure(Call<ObjectResults> call, Throwable t)
+                public void onFailure(Call<Results> call, Throwable t)
                 {
 
                     // 2.5 - Call the proper callback used in controller (MainFragment)
@@ -57,6 +74,7 @@ public class ApiCalls {
 
                 }
             });
+
         }
 
 }

@@ -13,14 +13,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.reflect.TypeToken;
 import com.mynews.flooo.mynews.ApiRest.ApiCalls;
-
-import com.mynews.flooo.mynews.ApiRest.News;
-import com.mynews.flooo.mynews.ApiRest.ObjectResults;
+import com.mynews.flooo.mynews.ApiRest.Results;
 
 
 import org.json.JSONException;
@@ -36,57 +30,56 @@ public class FragmentPageActuality extends Fragment implements ApiCalls.Callback
 {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
+    private static final String PAGE = "PageName";
     private static final String ARG_PARAM2 = "param2";
 
     // TODO: Rename and change types of parameters
-    private String mParam1;
+    private String page;
     private String mParam2;
 
     private AdapterRecyclerView adapterRecyclerView;
-    private ObjectResults listnews;
+    private Results listnews;
 
 
 
     // TODO: Rename and change types and number of parameters
-    public static FragmentPageActuality newInstance()
+    public static FragmentPageActuality newInstance(String page)
     {
         FragmentPageActuality fragment = new FragmentPageActuality();
 
         Bundle args = new Bundle();
-        //args.putString(ARG_PARAM1, param1);
-        //args.putString(ARG_PARAM2, param2);
+        args.putString(PAGE, page);
         fragment.setArguments(args);
         return fragment;
     }
 
-    @Override
-    public void onCreate(Bundle savedInstanceState)
-    {
-
-        super.onCreate(savedInstanceState);
-
-        if (getArguments() != null)
-        {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
         View view = inflater.inflate(R.layout.fragment_page_actuality, container, false);
+        page = getArguments().getString(PAGE);
+
 
         RecyclerView recyclerView = view.findViewById(R.id.listNews);
         recyclerView.setLayoutManager(new LinearLayoutManager(container.getContext()));
 
-        this.listnews = new ObjectResults();
+        this.listnews = new Results();
 
-        //ApiCalls.fetchUserFollowing(this, "JakeWharton");
-        ApiCalls.getTopStories(this);
+        //ApiCalls.getSection(this,page);
 
-        this.adapterRecyclerView = new AdapterRecyclerView(this.listnews,this.getContext());
+        System.out.println(page);
+
+        switch(page)
+        {
+            case "Top Stories": ApiCalls.getTopStories(this);break;
+            case "Most Popular":ApiCalls.getMostPopular(this);break;
+            default: ApiCalls.getSection(this,page.toLowerCase());break;
+        }
+
+
+
+        this.adapterRecyclerView = new AdapterRecyclerView(this.listnews,this.getContext(),page);
         recyclerView.setAdapter(this.adapterRecyclerView);
 
         // Inflate the layout for this fragment
@@ -113,12 +106,14 @@ public class FragmentPageActuality extends Fragment implements ApiCalls.Callback
     }
 
     @Override
-    public void onResponse(@Nullable ObjectResults listResultsJson)
+    public void onResponse(@Nullable Results listResultsJson)
     {
+
+        //System.out.println(listResultsJson.size());
         if(listResultsJson!=null)
         {
             //Log.e("CallBackOnSucess", listResultsJson.get(0).getTitle());
-            System.out.println(listResultsJson.size());
+
             listnews.addAll(listResultsJson) ;
             adapterRecyclerView.notifyDataSetChanged();
         }

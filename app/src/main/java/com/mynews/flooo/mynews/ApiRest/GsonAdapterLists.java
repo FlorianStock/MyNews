@@ -11,21 +11,23 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-class GsonAdapterLists extends TypeAdapter<ObjectResults> {
+class GsonAdapterLists extends TypeAdapter<Results> {
+
+    private String name = null;
 
     @Override
-    public void write(JsonWriter out, ObjectResults value) throws IOException {
+    public void write(JsonWriter out, Results value) throws IOException {
 
     }
 
     @Override
-    public ObjectResults read(JsonReader reader) throws IOException {
+    public Results read(JsonReader reader) throws IOException {
 
 
-        ObjectResults list = new ObjectResults();
+        Results list = new Results();
         ArrayList<News> listNews = new ArrayList<>();
 
-        String name = null;
+
 
 
         reader.beginObject();
@@ -35,7 +37,8 @@ class GsonAdapterLists extends TypeAdapter<ObjectResults> {
 
             JsonToken token = reader.peek();
 
-            if (token.equals(JsonToken.NAME)) {
+            if (token.equals(JsonToken.NAME))
+            {
                 //get the current token
                 name = reader.nextName();
             }
@@ -59,15 +62,9 @@ class GsonAdapterLists extends TypeAdapter<ObjectResults> {
 
                     while (reader.hasNext())
                     {
-
-
-                        //Log.e("CallBackOnSuccess", listResultsJson.toString());
-                        // Log.e("CallBackOnSuccess", reader.nextName());
-
                         switch (reader.nextName())
                         {
                             case "section":
-
                                 token = reader.peek();
                                 article.setSection(reader.nextString());
                                 break;
@@ -87,65 +84,16 @@ class GsonAdapterLists extends TypeAdapter<ObjectResults> {
                                 token = reader.peek();
                                 article.setUrl(reader.nextString());
                                 break;
-
                             case "multimedia":
-                                token = reader.peek();
-
-                                reader.beginArray();
-
-                                while (reader.hasNext())
-                                {
-
-                                    reader.beginObject();
-                                    FormatDataImage formatDataImage = new FormatDataImage();
-
-                                    while (reader.hasNext())
-                                    {
-
-
-
-
-                                        switch (reader.nextName())
-                                        {
-                                            case "url":
-                                                token = reader.peek();
-                                                formatDataImage.setUrl(reader.nextString());
-                                                break;
-                                            case "format":
-                                                token = reader.peek();
-                                                formatDataImage.setFormat(reader.nextString());
-                                                break;
-                                            case "height":
-                                                token = reader.peek();
-                                                formatDataImage.setHeight(reader.nextInt());
-                                                break;
-                                            case "width":
-                                                token = reader.peek();
-                                                formatDataImage.setWidth(reader.nextInt());
-                                                break;
-                                            default:
-                                                token = reader.peek();
-                                                reader.skipValue();
-
-                                        }
-
-
-
-
-                                    }
-
-                                    article.add(formatDataImage);
-                                    reader.endObject();
-                                }
-
-                                reader.endArray();
+                                SearchImagesTopStories(reader,article);
                                 break;
-
+                            case "media":
+                                SearchImagesMostPopular(reader,article);
+                                break;
                             default:
                                 token = reader.peek();
                                 reader.skipValue();
                         }
-                        //reader.endArray();
 
                     }
 
@@ -172,8 +120,128 @@ class GsonAdapterLists extends TypeAdapter<ObjectResults> {
             return list;
         }
 
+        private void SearchImagesTopStories(JsonReader reader,News article) throws IOException
+        {
 
+            reader.peek();
+            reader.beginArray();
+
+            while (reader.hasNext())
+            {
+                reader.beginObject();
+                FormatDataImage formatDataImage = new FormatDataImage();
+
+                while (reader.hasNext())
+                {
+
+                    switch (reader.nextName())
+                    {
+                        case "url":
+                            reader.peek();
+                            formatDataImage.setUrl(reader.nextString());
+                            break;
+                        case "format":
+                            reader.peek();
+                            formatDataImage.setFormat(reader.nextString());
+                            break;
+                        case "height":
+                            reader.peek();
+                            formatDataImage.setHeight(reader.nextInt());
+                            break;
+                        case "width":
+                            reader.peek();
+                            formatDataImage.setWidth(reader.nextInt());
+                            break;
+                        default:
+                            reader.peek();
+                            reader.skipValue();
+
+                    }
+
+                }
+                article.add(formatDataImage);
+                reader.endObject();
+            }
+
+            reader.endArray();
+
+
+        }
+    private void SearchImagesMostPopular(JsonReader reader,News article) throws IOException
+    {
+
+        reader.peek();
+        reader.beginArray();
+
+        while (reader.hasNext())
+        {
+            reader.beginObject();
+
+
+            while (reader.hasNext())
+            {
+
+                if(reader.nextName().equals("media-metadata"))
+                {
+                    reader.beginArray();
+
+
+                    while (reader.hasNext())
+                    {
+                        FormatDataImage formatDataImage = new FormatDataImage();
+                        reader.beginObject();
+
+                        while(reader.hasNext())
+                        {
+
+                            switch (reader.nextName())
+                            {
+                                case "url":
+                                    reader.peek();
+                                    formatDataImage.setUrl(reader.nextString());
+                                    break;
+                                case "format":
+                                    reader.peek();
+                                    formatDataImage.setFormat(reader.nextString());
+                                    break;
+                                case "height":
+                                    reader.peek();
+                                    formatDataImage.setHeight(reader.nextInt());
+                                    break;
+                                case "width":
+                                    reader.peek();
+                                    formatDataImage.setWidth(reader.nextInt());
+                                    break;
+                                default:
+                                    reader.peek();
+                                    reader.skipValue();
+                            }
+                        }
+
+                        reader.endObject();
+                        article.add(formatDataImage);
+                    }
+
+
+                    reader.endArray();
+
+                }
+                else
+                {
+                    reader.peek();
+                    reader.skipValue();
+                }
+
+
+            }
+
+            reader.endObject();
+        }
+
+        reader.endArray();
 
 
     }
+
+}
 

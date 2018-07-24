@@ -4,7 +4,6 @@ package com.mynews.flooo.mynews.ApiRest;
 import android.support.annotation.Nullable;
 import android.util.Log;
 import java.lang.ref.WeakReference;
-import java.util.List;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -47,7 +46,7 @@ public class ApiCalls
 
         private static void EnqueueCall(Call call, Callbacks callbacks )
         {
-            final WeakReference<Callbacks> callbacksWeakReference = new WeakReference<Callbacks>(callbacks);
+            final WeakReference<Callbacks> callbacksWeakReference = new WeakReference<>(callbacks);
 
             call.enqueue(new Callback <Results>()
             {
@@ -67,10 +66,11 @@ public class ApiCalls
                 @Override
                 public void onFailure(Call<Results> call, Throwable t)
                 {
-
                     // 2.5 - Call the proper callback used in controller (MainFragment)
-                    if (callbacksWeakReference.get() != null){Log.e("CallBackOnFailure", t.getMessage());}
-
+                    if (callbacksWeakReference.get() != null)
+                    {
+                        Log.e("CallBackOnFailure", t.getMessage());
+                    }
 
                 }
             });

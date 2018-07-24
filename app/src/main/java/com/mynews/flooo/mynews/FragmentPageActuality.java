@@ -77,8 +77,6 @@ public class FragmentPageActuality extends Fragment implements ApiCalls.Callback
             default: ApiCalls.getSection(this,page.toLowerCase());break;
         }
 
-
-
         this.adapterRecyclerView = new AdapterRecyclerView(this.listnews,this.getContext(),page);
         recyclerView.setAdapter(this.adapterRecyclerView);
 

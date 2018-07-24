@@ -49,9 +49,7 @@ public class AdapterRecyclerView extends RecyclerView.Adapter<AdapterRecyclerVie
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position)
     {
-
         holder.updateView(objectResults.get(position));
-
     }
 
     @Override

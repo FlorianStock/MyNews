@@ -1,5 +1,6 @@
 package com.mynews.flooo.mynews;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
@@ -64,8 +65,15 @@ public class MainActivity extends AppCompatActivity {
     {
         switch (item.getItemId()) {
 
-            case R.id.action_add:
-                /* DO ADD */
+            case R.id.notifications:
+                Intent intent = new Intent(MainActivity.this, OptionsActivity.class);
+                intent.putExtra("FragmentLoad","Notifications");
+                startActivity(intent);
+                return true;
+            case R.id.action_search:
+                Intent intentSearch = new Intent(MainActivity.this, OptionsActivity.class);
+                intentSearch.putExtra("FragmentLoad","Search Articles");
+                startActivity(intentSearch);
                 return true;
 
         }

@@ -41,18 +41,21 @@ android:id="@+id/options">
     android:orientation="vertical">
 
     <CheckBox
+        android:tag="Arts"
         android:id="@+id/checkArts"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Arts" />
 
     <CheckBox
+        android:tag="Politics"
         android:id="@+id/checkPolitics"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Politics" />
 
     <CheckBox
+        android:tag="Business"
         android:id="@+id/checBusiness"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -67,19 +70,21 @@ android:id="@+id/options">
             android:orientation="vertical">
 
             <CheckBox
-
+                android:tag="Sports"
                 android:id="@+id/checkSports"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Sports" />
 
             <CheckBox
-                android:id="@+id/checkEntrepreneus"
+                android:tag="Entrepreneurs"
+                android:id="@+id/checkEntrepreneur"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Entrepreneurs" />
 
             <CheckBox
+                android:tag="Travel"
                 android:id="@+id/checkTravel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

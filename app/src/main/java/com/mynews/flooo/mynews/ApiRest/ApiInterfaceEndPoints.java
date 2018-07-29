@@ -7,6 +7,7 @@ import com.google.gson.GsonBuilder;
 
 import java.text.DateFormat;
 import java.util.List;
+import java.util.Map;
 
 import retrofit2.Call;
 import retrofit2.Retrofit;
@@ -14,6 +15,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
+import retrofit2.http.QueryMap;
 
 public interface ApiInterfaceEndPoints
 {
@@ -25,6 +27,11 @@ public interface ApiInterfaceEndPoints
     // Most Popular API
     @GET("svc/mostpopular/v2/mostshared/all-sections/30.json")
     Call<Results> getMostPopular(@Query("api-key") String apiKey);
+
+
+    @GET("svc/search/v2/articlesearch.json")
+    Call<Results> getNews(@Query("api-key") String apiKey,
+                          @QueryMap Map<String,String> filters);
 
 
     Gson gson = new GsonBuilder()

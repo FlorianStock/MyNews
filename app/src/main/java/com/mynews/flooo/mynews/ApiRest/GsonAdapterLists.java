@@ -13,6 +13,7 @@ class GsonAdapterLists extends TypeAdapter<Results>
 {
 
     private String name = null;
+    Results list;
 
     @Override
     public void write(JsonWriter out, Results value) throws IOException
@@ -24,7 +25,7 @@ class GsonAdapterLists extends TypeAdapter<Results>
     public Results read(JsonReader reader) throws IOException {
 
 
-        Results list = new Results();
+        list = new Results();
         ArrayList<News> listNews = new ArrayList<>();
 
             reader.beginObject();
@@ -46,18 +47,53 @@ class GsonAdapterLists extends TypeAdapter<Results>
                     token = reader.peek();
                     list.setNumResults(reader.nextInt());
                 }
+                else if ("response".equals(name))
+                {
+                    reader.beginObject();
+
+
+                        while (reader.hasNext())
+                        {
+
+                            //
+
+                            if(reader.nextName().equals("docs"))
+                            {
+
+                                SearchArticles(reader);
+
+                            }
+                            else
+                            {
+                                reader.skipValue();
+                            }
+
+
+                        }
+
+                    reader.endObject();
+
+
+
+
+
+
+                }
                 else if ("results".equals(name))
                 {
 
                     reader.beginArray();
 
 
-                    while (reader.hasNext()) {
+                    while (reader.hasNext())
+                    {
                         reader.beginObject();
                         News article = new News();
 
-                        while (reader.hasNext()) {
-                            switch (reader.nextName()) {
+                        while (reader.hasNext())
+                        {
+                            switch (reader.nextName())
+                            {
                                 case "section":
                                     token = reader.peek();
                                     article.setSection(reader.nextString());
@@ -100,7 +136,9 @@ class GsonAdapterLists extends TypeAdapter<Results>
 
                     reader.endArray();
 
-                } else {
+                }
+                else
+                {
                     reader.skipValue(); //avoid some unhandle events
                 }
 
@@ -108,18 +146,101 @@ class GsonAdapterLists extends TypeAdapter<Results>
 
             reader.endObject();
 
-            //reader.close();
+            //
 
             return list;
 
 
+    }
+
+    private void SearchArticles(JsonReader reader) throws IOException
+    {
+        reader.peek();
+        reader.beginArray();
+
+
+
+        while (reader.hasNext())
+        {
+            reader.beginObject();
+            News article = new News();
+
+            while (reader.hasNext())
+            {
+
+                switch (reader.nextName())
+                {
+                    case "web_url":
+                        article.setUrl(reader.nextString());
+                        break;
+                    case "multimedia":
+
+                        reader.beginArray();
+
+                        while (reader.hasNext())
+                        {
+                            reader.beginObject();
+                            FormatDataImage image = new FormatDataImage();
+
+                            while (reader.hasNext())
+                            {
+                                switch (reader.nextName())
+                                {
+                                    case "subtype":
+                                        image.setFormat(reader.nextString());
+                                        break;
+                                    case "url":
+                                        image.setUrl(reader.nextString());
+                                        break;
+                                    default:reader.skipValue();
+
+                                }
+                            }
+
+                            reader.endObject();
+                            article.add(image);
+                        }
+
+                        reader.endArray();
+
+                        break;
+                    case "section_name":article.setSection(reader.nextString());
+                        break;
+                    case "headline":
+                        reader.beginObject();
+
+                        while (reader.hasNext())
+                        {
+
+                            switch (reader.nextName())
+                            {
+                                case "main":article.setTitle(reader.nextString());
+                                    break;
+                                default: reader.skipValue();
+                            }
+
+
+                        }
+                        reader.endObject();
+
+                    break;
+                    default:reader.skipValue();
+
+
+
+                }
+            }
+
+            list.add(article);
+            reader.endObject();
+        }
+
+        reader.endArray();
 
     }
 
 
-
-
-        private void SearchImagesTopStories(JsonReader reader,News article) throws IOException
+    private void SearchImagesTopStories(JsonReader reader,News article) throws IOException
         {
 
             reader.peek();

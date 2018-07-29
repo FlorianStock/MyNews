@@ -89,7 +89,7 @@ public class OptionsActivity extends AppCompatActivity implements CheckBox.OnChe
         notificationSwitch.setChecked(sharedPreferences.getBoolean("Notifications",false));
 
 
-        final AlarmNotifications alarmNotifs = new AlarmNotifications();
+        final AlarmNotifications alarmNotifs = new AlarmNotifications(getcontext);
         final Context context = getcontext;
 
         notificationSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener()

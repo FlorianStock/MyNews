@@ -53,7 +53,6 @@ public class ApiTestDataReceive implements ApiCalls.Callbacks
     public void onResponse(@Nullable Results listNews)
     {
 
-
         if(listNews!=null)
         {
             System.out.println(listNews.size());

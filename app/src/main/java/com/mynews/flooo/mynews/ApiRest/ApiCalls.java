@@ -4,6 +4,9 @@ package com.mynews.flooo.mynews.ApiRest;
 import android.support.annotation.Nullable;
 import android.util.Log;
 import java.lang.ref.WeakReference;
+import java.util.HashMap;
+import java.util.Map;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -43,6 +46,30 @@ public class ApiCalls
             Call <Results> call = apiInterfaceEndPoints.getTopStories(section,API_KEY);
             EnqueueCall(call,callbacks);
         }
+
+    public  static void getArticleSearch(Callbacks callbacks,String sections, String QueryTerms)
+    {
+
+        Map<String,String> mapQueryInfo= new HashMap<>();
+
+        //Section search
+        mapQueryInfo.put("fq",sections);
+        //Search news articles
+        mapQueryInfo.put("sort","newest");
+        //Search with date
+        //mapQueryInfo.put("begin_date","newest");
+        //mapQueryInfo.put("end_date","newest");
+        //Query terms
+        mapQueryInfo.put("q",QueryTerms);
+        //Delimited list of fields
+        mapQueryInfo.put("fl","multimedia,web_url,section_name,headline");
+        //Enables HighLighting in search results
+        mapQueryInfo.put("hl","true");
+
+        ApiInterfaceEndPoints apiInterfaceEndPoints = ApiInterfaceEndPoints.retrofit.create(ApiInterfaceEndPoints.class);
+        Call <Results> call = apiInterfaceEndPoints.getNews(API_KEY,mapQueryInfo);
+        EnqueueCall(call,callbacks);
+    }
 
         private static void EnqueueCall(Call call, Callbacks callbacks )
         {

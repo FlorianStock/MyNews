@@ -14,9 +14,10 @@ class GsonAdapterLists extends TypeAdapter<Results>
 
     private String name = null;
     Results list;
+    public JsonReader reader=null;
 
     @Override
-    public void write(JsonWriter out, Results value) throws IOException
+    public void write(JsonWriter out, Results value)
     {
 
     }
@@ -24,19 +25,19 @@ class GsonAdapterLists extends TypeAdapter<Results>
     @Override
     public Results read(JsonReader reader) throws IOException {
 
+        this.reader = reader;
 
         list = new Results();
         ArrayList<News> listNews = new ArrayList<>();
 
+
             reader.beginObject();
 
-            while (reader.hasNext())
-            {
+            while (reader.hasNext()) {
 
                 JsonToken token = reader.peek();
 
-                if (token.equals(JsonToken.NAME))
-                {
+                if (token.equals(JsonToken.NAME)) {
                     //get the current token
                     name = reader.nextName();
                 }
@@ -46,54 +47,41 @@ class GsonAdapterLists extends TypeAdapter<Results>
                 {
                     token = reader.peek();
                     list.setNumResults(reader.nextInt());
-                }
-                else if ("response".equals(name))
+                } else if ("response".equals(name))
                 {
                     reader.beginObject();
 
 
-                        while (reader.hasNext())
-                        {
+                    while (reader.hasNext()) {
 
-                            //
+                        //
 
-                            if(reader.nextName().equals("docs"))
-                            {
+                        if (reader.nextName().equals("docs")) {
 
-                                SearchArticles(reader);
+                            SearchArticles(reader);
 
-                            }
-                            else
-                            {
-                                reader.skipValue();
-                            }
-
-
+                        } else {
+                            reader.skipValue();
                         }
+
+
+                    }
 
                     reader.endObject();
 
 
-
-
-
-
-                }
-                else if ("results".equals(name))
-                {
+                } else if ("results".equals(name)) {
 
                     reader.beginArray();
 
 
-                    while (reader.hasNext())
-                    {
+                    while (reader.hasNext()) {
                         reader.beginObject();
                         News article = new News();
+                        article.setSubsection("");
 
-                        while (reader.hasNext())
-                        {
-                            switch (reader.nextName())
-                            {
+                        while (reader.hasNext()) {
+                            switch (reader.nextName()) {
                                 case "section":
                                     token = reader.peek();
                                     article.setSection(reader.nextString());
@@ -136,9 +124,8 @@ class GsonAdapterLists extends TypeAdapter<Results>
 
                     reader.endArray();
 
-                }
-                else
-                {
+                } else {
+                    reader.peek();
                     reader.skipValue(); //avoid some unhandle events
                 }
 
@@ -146,10 +133,10 @@ class GsonAdapterLists extends TypeAdapter<Results>
 
             reader.endObject();
 
-            //
 
+
+        //reader.close();
             return list;
-
 
     }
 
@@ -164,6 +151,7 @@ class GsonAdapterLists extends TypeAdapter<Results>
         {
             reader.beginObject();
             News article = new News();
+            article.setSubsection("");
 
             while (reader.hasNext())
             {
@@ -190,7 +178,7 @@ class GsonAdapterLists extends TypeAdapter<Results>
                                         image.setFormat(reader.nextString());
                                         break;
                                     case "url":
-                                        image.setUrl(reader.nextString());
+                                        image.setUrl("https://www.nytimes.com/"+reader.nextString());
                                         break;
                                     default:reader.skipValue();
 
@@ -204,7 +192,11 @@ class GsonAdapterLists extends TypeAdapter<Results>
                         reader.endArray();
 
                         break;
-                    case "section_name":article.setSection(reader.nextString());
+                    case "news_desk":article.setSection(reader.nextString());reader.peek();
+                        break;
+                    case "section_name":article.setSubsection(reader.nextString());reader.peek();
+                        break;
+                    case "pub_date":article.setDate(reader.nextString());reader.peek();
                         break;
                     case "headline":
                         reader.beginObject();

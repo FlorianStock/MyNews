@@ -33,9 +33,10 @@ public interface ApiInterfaceEndPoints
     Call<Results> getNews(@Query("api-key") String apiKey,
                           @QueryMap Map<String,String> filters);
 
+    GsonAdapterLists gsonAdapterLists = new GsonAdapterLists();
 
     Gson gson = new GsonBuilder()
-            .registerTypeAdapter(Results.class, new GsonAdapterLists())
+            .registerTypeAdapter(Results.class, gsonAdapterLists)
             .setDateFormat(DateFormat.LONG)
             .setFieldNamingPolicy(FieldNamingPolicy.UPPER_CAMEL_CASE)
             .setPrettyPrinting()
@@ -47,5 +48,7 @@ public interface ApiInterfaceEndPoints
             .baseUrl("https://api.nytimes.com/")
             .addConverterFactory(GsonConverterFactory.create(gson))
             .build();
+
+
 
 }

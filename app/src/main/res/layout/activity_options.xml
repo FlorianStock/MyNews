@@ -14,17 +14,19 @@ android:id="@+id/options">
         android:background="?attr/colorPrimary"
         android:id="@+id/toolbar" />
 
-<EditText
-    android:id="@+id/editText"
-    android:layout_marginRight="20sp"
-    android:layout_marginLeft="20sp"
-    android:layout_marginTop="10sp"
-    android:layout_marginBottom="10sp"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:ems="10"
-    android:inputType="textPersonName"
-    android:text="Search query term" />
+    <EditText
+        android:id="@+id/editTextQueryTerms"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10sp"
+        android:layout_marginLeft="20sp"
+        android:layout_marginRight="20sp"
+        android:layout_marginTop="10sp"
+        android:ems="10"
+        android:freezesText="false"
+        android:inputType="textPersonName"
+        android:hint="Search query term"
+         />
 
     <LinearLayout
         android:layout_width="wrap_content"

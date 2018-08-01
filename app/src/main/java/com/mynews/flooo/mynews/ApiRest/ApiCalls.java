@@ -3,7 +3,11 @@ package com.mynews.flooo.mynews.ApiRest;
 
 import android.support.annotation.Nullable;
 import android.util.Log;
+
+import com.mynews.flooo.mynews.OptionsActivity;
+
 import java.lang.ref.WeakReference;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -17,12 +21,17 @@ public class ApiCalls
 
         private static final String API_KEY = "f06e19cbd14d467d9f345b263f9c3cfe";
 
-        // 1 - Creating a callback
+
+
+
+    // 1 - Creating a callback
         public interface Callbacks
         {
             void onResponse(@Nullable Results listNews);
             void onFailure();
         }
+
+
 
         // 2 - Public method to start fetching users following by Jake Wharton
 
@@ -53,18 +62,21 @@ public class ApiCalls
         Map<String,String> mapQueryInfo= new HashMap<>();
 
         //Section search
-        mapQueryInfo.put("fq",sections);
+        mapQueryInfo.put("fq","news_desk:(\"Sports\" \"Politics\")");
         //Search news articles
         mapQueryInfo.put("sort","newest");
         //Search with date
         //mapQueryInfo.put("begin_date","newest");
         //mapQueryInfo.put("end_date","newest");
         //Query terms
-        mapQueryInfo.put("q",QueryTerms);
+
+        mapQueryInfo.put("q", QueryTerms);
+
         //Delimited list of fields
-        mapQueryInfo.put("fl","multimedia,web_url,section_name,headline");
+        mapQueryInfo.put("fl","multimedia,web_url,section_name,headline,news_desk,pub_date");
         //Enables HighLighting in search results
         mapQueryInfo.put("hl","true");
+        //mapQueryInfo.put("facet_filter","true");
 
         ApiInterfaceEndPoints apiInterfaceEndPoints = ApiInterfaceEndPoints.retrofit.create(ApiInterfaceEndPoints.class);
         Call <Results> call = apiInterfaceEndPoints.getNews(API_KEY,mapQueryInfo);
@@ -82,10 +94,13 @@ public class ApiCalls
                 public void onResponse(Call<Results> call, Response<Results>response)
                 {
                     // 2.5 - Call the proper callback used in controller (MainFragment)
-                    if (callbacksWeakReference.get() != null)
+
+
+                    if (callbacksWeakReference.get() != null && response.isSuccessful())
                     {
-                        //System.out.println(response.body().getNumResults());
+
                         callbacksWeakReference.get().onResponse(response.body());
+                        callbacksWeakReference.clear();
                         Log.e("CallBackOnSucess", "Sucess JSON PARSE");
                     }
                 }

@@ -96,27 +96,27 @@ public class AdapterRecyclerView extends RecyclerView.Adapter<AdapterRecyclerVie
 
             String textFolder = displayList.getSection();
 
-            if(!page.equals("Most Popular"))
-            {
+
                 if (!displayList.getSubsection().equals(""))
                 {
                     textFolder = displayList.getSection() + " > " + displayList.getSubsection();
                 }
-            }
+
 
             name.setText(textFolder);
             description.setText(displayList.getTitle());
             dateText.setText(ChangeDate(displayList.getDate()));
+
             webUrl = displayList.getUrl();
 
             for(FormatDataImage dataImage: displayList)
             {
 
-                    if (dataImage.getFormat().equals("Standard Thumbnail") )
+
+                    if (dataImage.getFormat().equals("Standard Thumbnail") || dataImage.getFormat().equals("thumbnail") )
                     {
                         Picasso.with(context).load(dataImage.getUrl()).into(imageIcon);
                     }
-
 
             }
 
@@ -126,7 +126,7 @@ public class AdapterRecyclerView extends RecyclerView.Adapter<AdapterRecyclerVie
         {
             String dateChanged=null;
 
-            if(!page.equals("Most Popular"))
+            if(page.equals("world") || page.equals("Top Stories"))
             {
 
                 try
@@ -142,7 +142,7 @@ public class AdapterRecyclerView extends RecyclerView.Adapter<AdapterRecyclerVie
                 }
 
             }
-            else
+            else if(page.equals("Most Popular"))
             {
                 try
                 {
@@ -156,6 +156,22 @@ public class AdapterRecyclerView extends RecyclerView.Adapter<AdapterRecyclerVie
 
                 }
             }
+            else if(page.equals("Search Articles") || page.equals("Notifications"))
+            {
+
+                try
+                {
+                    SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss+SSS");
+                    SimpleDateFormat formatDisplay = new SimpleDateFormat("dd/MM/yyyy");
+                    Date date = format.parse(dateData);
+                    dateChanged = formatDisplay.format(date);
+                }
+                catch (ParseException e)
+                {
+
+                }
+            }
+
 
             return dateChanged;
 

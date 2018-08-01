@@ -7,14 +7,19 @@ import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
-import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Switch;
+import android.widget.Toast;
+
+import com.mynews.flooo.mynews.AlarmNotifications.AlarmNotifications;
+import com.mynews.flooo.mynews.AlarmNotifications.AlarmOnReceive;
+import com.mynews.flooo.mynews.AlarmNotifications.GetInfoPreferences;
 
 import java.util.ArrayList;
 
@@ -24,6 +29,8 @@ public class OptionsActivity extends AppCompatActivity implements CheckBox.OnChe
 
     private SharedPreferences sharedPreferences;
     private ArrayList<CheckBox> boxes;
+    private EditText editTextQueryTerms;
+    private  String optionsStatus;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -32,7 +39,7 @@ public class OptionsActivity extends AppCompatActivity implements CheckBox.OnChe
         setContentView(R.layout.activity_options);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
-        String optionsStatus = getIntent().getStringExtra("FragmentLoad");
+        optionsStatus = getIntent().getStringExtra("LoadLayout");
         toolbar.setTitle(optionsStatus);
 
         setSupportActionBar(toolbar);
@@ -43,7 +50,7 @@ public class OptionsActivity extends AppCompatActivity implements CheckBox.OnChe
 
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
 
-        boxes = new ArrayList<>();
+        boxes = new ArrayList<CheckBox>();
         boxes.add((CheckBox)findViewById(R.id.checkArts));
         boxes.add((CheckBox)findViewById(R.id.checkSports));
         boxes.add((CheckBox)findViewById(R.id.checkPolitics));
@@ -51,23 +58,30 @@ public class OptionsActivity extends AppCompatActivity implements CheckBox.OnChe
         boxes.add((CheckBox)findViewById(R.id.checBusiness));
         boxes.add((CheckBox)findViewById(R.id.checkTravel));
 
-        for(CheckBox checkBox:boxes)
-        {
-            checkBox.setChecked(sharedPreferences.getBoolean(checkBox.getTag().toString(),true));
-            checkBox.setOnCheckedChangeListener(this);
-        }
 
+        editTextQueryTerms = findViewById(R.id.editTextQueryTerms);
 
         switch (optionsStatus)
         {
             case "Notifications":
                 View view = getLayoutInflater().inflate(R.layout.notifications, mainLayout,false);
                 mainLayout.addView(view);
+
+                editTextQueryTerms.setText(sharedPreferences.getString("QueryTerms","Search query term"));
+
+                for(CheckBox checkBox:boxes)
+                {
+                    checkBox.setChecked(sharedPreferences.getBoolean(checkBox.getTag().toString(),true));
+                    checkBox.setOnCheckedChangeListener(this);
+                }
+
                 notificationState(this.getBaseContext(),view);
                 break;
+
             case "Search Articles":
-                View view2 = getLayoutInflater().inflate(R.layout.search_articles, mainLayout,false);
-                mainLayout.addView(view2);
+                View viewSearch = getLayoutInflater().inflate(R.layout.search_articles, mainLayout,false);
+                mainLayout.addView(viewSearch);
+                searchState(this.getBaseContext(),viewSearch);
                 break;
 
         }
@@ -81,29 +95,82 @@ public class OptionsActivity extends AppCompatActivity implements CheckBox.OnChe
 
 
 
+    private void searchState(Context getContext,View view)
+    {
+        Button clickSearch = view.findViewById(R.id.searchButton);
+        clickSearch.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
+
+                if(VerifyAtLeastOneCheckBox())
+                {
+                    Intent intentSearch = new Intent(OptionsActivity.this, MainActivity.class);
+                    intentSearch.putExtra("CallBack", "Search Articles");
+                    GetInfoPreferences.declaresVariablesWidgets(boxes,editTextQueryTerms.getText().toString());
+                    startActivity(intentSearch);
+                }
+                else
+                {
+                    Toast.makeText(getBaseContext(),"One checkbox must be checked for uses the search", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+    }
 
 
-    private void notificationState(Context getcontext,View view)
+    private boolean VerifyAtLeastOneCheckBox()
+    {
+        for(CheckBox checkBox:boxes)
+        {
+            if(checkBox.isChecked())
+            {
+                return true;
+            }
+        }
+        return false;
+
+
+    }
+    private void notificationState(Context getContext,View view)
     {
         Switch notificationSwitch = view.findViewById(R.id.switch_notif);
         notificationSwitch.setChecked(sharedPreferences.getBoolean("Notifications",false));
 
 
-        final AlarmNotifications alarmNotifs = new AlarmNotifications(getcontext);
-        final Context context = getcontext;
+        final AlarmNotifications alarmNotifs = new AlarmNotifications();
+        final AlarmOnReceive  receive = new AlarmOnReceive();
+        final Context context = getContext;
+
+
 
         notificationSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener()
         {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked)
             {
+                Boolean activeNotification = VerifyAtLeastOneCheckBox();
+
                 if(isChecked)
                 {
-                    sharedPreferences.edit().putBoolean("Notifications",true).apply();
-                    alarmNotifs.setAlarm(context);
-                    Intent i = new Intent(context, AlarmNotifications.class);
-                    alarmNotifs.onReceive(context,i);
 
-                    //alarmNotifs.test;
+                    if(activeNotification)
+                    {
+                        sharedPreferences.edit().putString("QueryTerm",editTextQueryTerms.getText().toString()).apply();
+                        sharedPreferences.edit().putBoolean("Notifications", true).apply();
+                        alarmNotifs.setAlarm(context);
+                        Intent i = new Intent(context, AlarmNotifications.class);
+
+                        //FOR TEST ONLY
+                        //receive.onReceive(context, i);
+                    }
+                    else
+                    {
+                        Toast.makeText(getBaseContext(),"One checkbox must be checked for active the notifications", Toast.LENGTH_SHORT).show();
+                        buttonView.setChecked(false);
+                    }
+
+
                 }
                 else
                 {
@@ -121,7 +188,8 @@ public class OptionsActivity extends AppCompatActivity implements CheckBox.OnChe
     }
 
     @Override
-    public boolean onSupportNavigateUp() {
+    public boolean onSupportNavigateUp()
+    {
         onBackPressed();
         return true;
     }
@@ -132,7 +200,7 @@ public class OptionsActivity extends AppCompatActivity implements CheckBox.OnChe
 
         for(CheckBox checkBox:boxes)
         {
-            if (checkBox==compoundButton)
+            if (checkBox==compoundButton && optionsStatus.equals("Notifications"))
             {
                 if(b)
                 {

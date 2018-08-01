@@ -4,41 +4,47 @@ package com.mynews.flooo.mynews;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.view.View;
+
+import java.util.ArrayList;
 
 
 public class AdapterPageActuality extends FragmentPagerAdapter
 {
 
 
-    private String[] tabTitles = new String[]{"Top Stories", "Most Popular","world"};
-    private int mNumOfTabs;
+    private ArrayList<String> tabTitles ;
+
 
     // 2 - Default Constructor
-    public AdapterPageActuality(FragmentManager mgr,int NumofTabs)
+    public AdapterPageActuality(FragmentManager mgr, ArrayList<String> tabTitles)
     {
         super(mgr);
-        this.mNumOfTabs = NumofTabs;
-        //this.colors = colors;
+
+        this.tabTitles = tabTitles;
     }
 
     @Override
     public int getCount()
     {
-        return (tabTitles.length);
+        return (tabTitles.size());
     }
 
     @Override
     public CharSequence getPageTitle(int position)
     {
-    return tabTitles[position];
+    return tabTitles.get(position);
     }
 
     @Override
     public Fragment getItem(int position)
     {
         // 4 - Page to return
-        return FragmentPageActuality.newInstance(tabTitles[position]);
+        return FragmentPageActuality.newInstance(tabTitles.get(position));
     }
+
+
+
 
 
 

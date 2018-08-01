@@ -4,7 +4,7 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.WAKE_LOCK" />
+
 
     <application
         android:allowBackup="true"
@@ -22,10 +22,7 @@
         </activity>
         <activity android:name=".WebViewActivity" />
         <activity android:name=".OptionsActivity" />
-        <activity
-            android:name=".Main2Activity"
-            android:label="@string/title_activity_main2"
-            android:theme="@style/AppTheme"></activity>
+        <receiver android:name=".AlarmNotifications.AlarmOnReceive" />
     </application>
 
 </manifest>

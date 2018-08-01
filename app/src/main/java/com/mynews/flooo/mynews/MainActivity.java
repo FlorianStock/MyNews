@@ -8,27 +8,50 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.CheckBox;
 
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 import com.mynews.flooo.mynews.ApiRest.News;
+import com.mynews.flooo.mynews.ApiRest.Results;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements Serializable {
 
+    @SerializedName("CheckBoxArray")
+    @Expose
+    public ArrayList<CheckBox> CheckBoxArray;
 
-
+    private ArrayList<String> tabTitles = new ArrayList<>();
+    //private String[] tabTitles = new String[]{"Top Stories", "Most Popular","world"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
-
-
         super.onCreate(savedInstanceState);
 
+        tabTitles.add("Top Stories");
+        tabTitles.add("Most Popular");
+        tabTitles.add("world");
 
+        String callBack = getIntent().getStringExtra("CallBack");
+
+        if(callBack!=null)
+        {
+            if(callBack.equals("Newest Articles"))
+            {
+                tabTitles.add("Newest Articles");
+            }
+            else if(callBack.equals("Search Articles"))
+            {
+                tabTitles.add("Search Articles");
+            }
+        }
 
         setContentView(R.layout.activity_main);
 
@@ -39,14 +62,14 @@ public class MainActivity extends AppCompatActivity {
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
 
         final ViewPager pager = findViewById(R.id.viewpager);
-        pager.setAdapter(new AdapterPageActuality(getSupportFragmentManager(),tabLayout.getTabCount()));
+        pager.setAdapter(new AdapterPageActuality(getSupportFragmentManager(),tabTitles));
         pager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
 
         tabLayout.setupWithViewPager(pager);
         tabLayout.setTabMode(TabLayout.MODE_FIXED);
+        tabLayout.setInlineLabel(true);
 
-        //AsyncTask apiTimes = new ApiNewYorkTimes(this).execute();
-
+        if(callBack!=null)pager.setCurrentItem(tabTitles.size());
 
     }
 
@@ -67,12 +90,12 @@ public class MainActivity extends AppCompatActivity {
 
             case R.id.notifications:
                 Intent intent = new Intent(MainActivity.this, OptionsActivity.class);
-                intent.putExtra("FragmentLoad","Notifications");
+                intent.putExtra("LoadLayout","Notifications");
                 startActivity(intent);
                 return true;
             case R.id.action_search:
                 Intent intentSearch = new Intent(MainActivity.this, OptionsActivity.class);
-                intentSearch.putExtra("FragmentLoad","Search Articles");
+                intentSearch.putExtra("LoadLayout","Search Articles");
                 startActivity(intentSearch);
                 return true;
 

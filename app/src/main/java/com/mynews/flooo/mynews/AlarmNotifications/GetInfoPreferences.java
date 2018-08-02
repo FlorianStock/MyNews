@@ -15,22 +15,12 @@ public class GetInfoPreferences
     private static HashMap<String, Boolean> checkBoxStates = new HashMap<String, Boolean>();
     private static String queryTerm;
 
-    public static void declaresVariablesWidgets(ArrayList<CheckBox> listCheckBox,String q)
+
+
+    public String queryTermBuild(String input)
     {
+        if(input.equals("")){return null;}
 
-        checkBoxStates.clear();
-        for (CheckBox checkBox:listCheckBox)
-        {
-            checkBoxStates.put(checkBox.getTag().toString(),checkBox.isChecked());
-
-        }
-
-       queryTerm=q;
-
-    }
-
-    private String queryTermBuild(String input)
-    {
         StringBuilder queryTermString =new StringBuilder();
 
         for (String value: input.split(" "))
@@ -43,10 +33,7 @@ public class GetInfoPreferences
         return queryTermString.toString();
     }
 
-    public String getQueryTermofView()
-    {
-        return queryTermBuild(queryTerm);
-    }
+
 
     public String buildSectionsStringForNotification(Context c)
     {
@@ -66,9 +53,22 @@ public class GetInfoPreferences
 
     }
 
-    public String buildSectionsStringForSearch()
+    public String buildSectionsStringForSearch(ArrayList<String> list)
     {
+        checkBoxStates.clear();
+
+        for(String key:list)
+        {
+            checkBoxStates.put(key,true);
+        }
+
         return buildNewsDeskQuery();
+
+    }
+
+    public String getQueryTerm()
+    {
+        return queryTermBuild(sharedPreferences.getString("QueryTerm",""));
     }
 
     private String buildNewsDeskQuery()
@@ -81,18 +81,18 @@ public class GetInfoPreferences
 
             if(entry.getValue())
             {
-                sectionsString.append(" ");
+                sectionsString.append(" \"");
                 sectionsString.append(entry.getKey());
-                sectionsString.append(", ");
+                sectionsString.append("\" ");
 
             }
 
         }
 
-        sectionsString.deleteCharAt(sectionsString.length()-2);
+        //sectionsString.deleteCharAt(sectionsString.length()-1);
         sectionsString.append(")");
         String sections= sectionsString.toString();
-
+        System.out.println(sections);
         return sections;
     }
 }

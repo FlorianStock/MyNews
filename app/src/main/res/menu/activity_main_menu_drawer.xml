@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/activity_main_drawer_news"
+            android:title="@string/app_name" />
+    </group>
+
+<item>
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/activity_main_drawer_profile"
+            android:title="@string/Top_Stories" />
+        <item
+            android:id="@+id/activity_main_drawer_settings"
+            android:title="@string/Most_Popular" />
+        <item
+            android:id="@+id/user"
+            android:title="@string/User_Section" />
+    </group>
+</item>
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/notif"
+            android:title="@string/Notifications" />
+        <item
+            android:id="@+id/search"
+            android:title="@string/Search_articles" />
+    </group>
+
+
+</menu>

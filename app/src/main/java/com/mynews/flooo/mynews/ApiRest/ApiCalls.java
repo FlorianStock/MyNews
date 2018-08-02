@@ -62,7 +62,7 @@ public class ApiCalls
         Map<String,String> mapQueryInfo= new HashMap<>();
 
         //Section search
-        mapQueryInfo.put("fq","news_desk:(\"Sports\" \"Politics\")");
+        mapQueryInfo.put("fq",sections);
         //Search news articles
         mapQueryInfo.put("sort","newest");
         //Search with date
@@ -70,7 +70,7 @@ public class ApiCalls
         //mapQueryInfo.put("end_date","newest");
         //Query terms
 
-        mapQueryInfo.put("q", QueryTerms);
+       if(QueryTerms!=null){mapQueryInfo.put("q", QueryTerms);}
 
         //Delimited list of fields
         mapQueryInfo.put("fl","multimedia,web_url,section_name,headline,news_desk,pub_date");

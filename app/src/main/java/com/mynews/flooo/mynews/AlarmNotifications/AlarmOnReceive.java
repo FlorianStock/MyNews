@@ -20,12 +20,11 @@ public class AlarmOnReceive extends BroadcastReceiver implements  ApiCalls.Callb
 
 
 
-        GetInfoPreferences getInfoPrefsForQueryMap = new GetInfoPreferences();
-        String sections = getInfoPrefsForQueryMap.buildSectionsStringForNotification(context);
+        GetInfoPreferences getInfo = new GetInfoPreferences();
+        String sections = getInfo.buildSectionsStringForNotification(context);
+        String queryTerm = getInfo.getQueryTerm();
 
-
-        ApiCalls apiCalls = new ApiCalls();
-        ApiCalls.getArticleSearch(this,sections,"");
+        ApiCalls.getArticleSearch(this,sections,queryTerm);
     }
 
     @Override

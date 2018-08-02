@@ -86,6 +86,7 @@ public class AdapterRecyclerView extends RecyclerView.Adapter<AdapterRecyclerVie
                 {
                     Intent intent = new Intent(context, WebViewActivity.class);
                     intent.putExtra("URL",webUrl);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     context.startActivity(intent);
                 }
             });

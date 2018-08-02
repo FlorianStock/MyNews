@@ -15,10 +15,14 @@ import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.v4.app.NotificationCompat;
 
+import com.mynews.flooo.mynews.ApiRest.News;
 import com.mynews.flooo.mynews.ApiRest.Results;
 import com.mynews.flooo.mynews.MainActivity;
+import com.mynews.flooo.mynews.OptionsActivity;
 import com.mynews.flooo.mynews.R;
+import com.mynews.flooo.mynews.ResultsActivity;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 
@@ -59,9 +63,12 @@ public class AlarmNotifications
     public void createNotification(Results results,Context context)
     {
 
+
+
+
+
         // 1 - Create an Intent that will be shown when user will click on the Notification
-        Intent intent = new Intent(context, MainActivity.class);
-        intent.putExtra("CallBack","Newest Articles");
+        Intent intent = new Intent(context, ResultsActivity.class);
 
         PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_ONE_SHOT);
 

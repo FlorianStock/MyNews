@@ -71,9 +71,6 @@ public class FragmentPageActuality extends Fragment implements ApiCalls.Callback
 
         this.listnews = new Results();
 
-        //ApiCalls.getSection(this,page);
-
-
 
         switch(page)
         {
@@ -85,18 +82,6 @@ public class FragmentPageActuality extends Fragment implements ApiCalls.Callback
                 break;
             case "world":
                 ApiCalls.getSection(this,"world");
-                break;
-            case "Newest Articles":
-                GetInfoPreferences getInfoPrefsForQueryMap = new GetInfoPreferences();
-                String sections = getInfoPrefsForQueryMap.buildSectionsStringForNotification(this.getContext());
-                ApiCalls.getArticleSearch(this,sections,"");
-                break;
-            case "Search Articles":
-                GetInfoPreferences getInfoPrefsForSearch = new GetInfoPreferences();
-                String sectionsSearchActives = getInfoPrefsForSearch.buildSectionsStringForSearch();
-                String queryTerm = getInfoPrefsForSearch.getQueryTermofView();
-                ApiCalls.getArticleSearch(this,sectionsSearchActives,queryTerm);
-
                 break;
 
             //default:  ApiCalls.getTopStories(this);

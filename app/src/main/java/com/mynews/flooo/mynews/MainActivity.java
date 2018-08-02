@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -39,20 +41,6 @@ public class MainActivity extends AppCompatActivity implements Serializable {
         tabTitles.add("Most Popular");
         tabTitles.add("world");
 
-        String callBack = getIntent().getStringExtra("CallBack");
-
-        if(callBack!=null)
-        {
-            if(callBack.equals("Newest Articles"))
-            {
-                tabTitles.add("Newest Articles");
-            }
-            else if(callBack.equals("Search Articles"))
-            {
-                tabTitles.add("Search Articles");
-            }
-        }
-
         setContentView(R.layout.activity_main);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -69,7 +57,10 @@ public class MainActivity extends AppCompatActivity implements Serializable {
         tabLayout.setTabMode(TabLayout.MODE_FIXED);
         tabLayout.setInlineLabel(true);
 
-        if(callBack!=null)pager.setCurrentItem(tabTitles.size());
+        DrawerLayout drawerLayout = findViewById(R.id.activity_main_drawer_layout);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.navigation_drawer_open,R.string.navigation_drawer_close);
+        drawerLayout.addDrawerListener(toggle);
+        toggle.syncState();
 
     }
 

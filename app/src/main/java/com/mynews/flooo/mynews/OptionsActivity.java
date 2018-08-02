@@ -67,7 +67,7 @@ public class OptionsActivity extends AppCompatActivity implements CheckBox.OnChe
                 View view = getLayoutInflater().inflate(R.layout.notifications, mainLayout,false);
                 mainLayout.addView(view);
 
-                editTextQueryTerms.setText(sharedPreferences.getString("QueryTerms","Search query term"));
+                editTextQueryTerms.setText(sharedPreferences.getString("QueryTerm",""));
 
                 for(CheckBox checkBox:boxes)
                 {
@@ -106,9 +106,26 @@ public class OptionsActivity extends AppCompatActivity implements CheckBox.OnChe
 
                 if(VerifyAtLeastOneCheckBox())
                 {
-                    Intent intentSearch = new Intent(OptionsActivity.this, MainActivity.class);
-                    intentSearch.putExtra("CallBack", "Search Articles");
-                    GetInfoPreferences.declaresVariablesWidgets(boxes,editTextQueryTerms.getText().toString());
+                    Intent intentSearch = new Intent(OptionsActivity.this, ResultsActivity.class);
+
+
+
+                    ArrayList<String> checkBoxToSend= new ArrayList<>();
+
+                    for(CheckBox box:boxes)
+                    {
+                        if(box.isChecked())
+                        {
+                            checkBoxToSend.add(box.getTag().toString());
+                        }
+                    }
+
+                    Bundle bundle = new Bundle();
+                    bundle.putStringArrayList("CheckBox",checkBoxToSend);
+                    bundle.putString("EditText",editTextQueryTerms.getText().toString());
+                    intentSearch.putExtras(bundle);
+
+                    //GetInfoPreferences.declaresVariablesWidgets(boxes,editTextQueryTerms.getText().toString());
                     startActivity(intentSearch);
                 }
                 else
@@ -162,7 +179,7 @@ public class OptionsActivity extends AppCompatActivity implements CheckBox.OnChe
                         Intent i = new Intent(context, AlarmNotifications.class);
 
                         //FOR TEST ONLY
-                        //receive.onReceive(context, i);
+                        receive.onReceive(context, i);
                     }
                     else
                     {
@@ -191,6 +208,11 @@ public class OptionsActivity extends AppCompatActivity implements CheckBox.OnChe
     public boolean onSupportNavigateUp()
     {
         onBackPressed();
+
+        if(optionsStatus.equals("Notifications"))
+        {
+            sharedPreferences.edit().putString("QueryTerm",editTextQueryTerms.getText().toString()).apply();
+        }
         return true;
     }
 

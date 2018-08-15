@@ -9,26 +9,42 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 
+import com.mynews.flooo.mynews.ApiRest.News;
+
+import java.util.ArrayList;
+import java.util.List;
+
+
 public class MainActivity extends AppCompatActivity {
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
+
+
         super.onCreate(savedInstanceState);
+
+
+
         setContentView(R.layout.activity_main);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         TabLayout tabLayout = findViewById(R.id.tab_layout);
-
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
 
         final ViewPager pager = findViewById(R.id.viewpager);
         pager.setAdapter(new AdapterPageActuality(getSupportFragmentManager(),tabLayout.getTabCount()));
         pager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
+
         tabLayout.setupWithViewPager(pager);
         tabLayout.setTabMode(TabLayout.MODE_FIXED);
+
+        //AsyncTask apiTimes = new ApiNewYorkTimes(this).execute();
 
 
     }
@@ -55,4 +71,9 @@ public class MainActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+
+
+
+
+
 }

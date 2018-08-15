@@ -12,7 +12,9 @@
     <string name="Search_articles">Search articles</string>
     <string name="Notifications">Notifications</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
+    <string name="about">Developed by Florian Stock, for a OpenClassroom Project</string>
+    <string name="headerImage">https://static.nytimes.com/images/icons/ios-ipad-144x144.png</string>
+
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_options">OptionsActivity</string>
     <string name="title_activity_main2">Main2Activity</string>

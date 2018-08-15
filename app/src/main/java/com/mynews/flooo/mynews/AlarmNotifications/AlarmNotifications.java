@@ -63,20 +63,15 @@ public class AlarmNotifications
     public void createNotification(Results results,Context context)
     {
 
-
-
-
-
-        // 1 - Create an Intent that will be shown when user will click on the Notification
         Intent intent = new Intent(context, ResultsActivity.class);
 
         PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_ONE_SHOT);
 
-        // 2 - Create a Style for the Notification
         NotificationCompat.InboxStyle inboxStyle = new NotificationCompat.InboxStyle();
         inboxStyle.setBigContentTitle("News Actualities");
 
         String sizeNews =  Integer.toString(results.size());
+
         inboxStyle.addLine(sizeNews+" articles newest may  to be interest you !");
 
         // 3 - Create a Channel (Android 8)

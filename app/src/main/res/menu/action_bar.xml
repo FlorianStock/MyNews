@@ -19,11 +19,13 @@
     </item>
 
     <item
+        android:id="@+id/menu_help"
         android:title="Help"
         app:showAsAction="never">
     </item>
 
     <item
+        android:id="@+id/menu_about"
         android:title="About"
         app:showAsAction="never">
     </item>

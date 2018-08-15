@@ -5,31 +5,32 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/activity_main_drawer_news"
-            android:title="@string/app_name" />
-    </group>
-
-<item>
-    <group android:checkableBehavior="single">
-        <item
-            android:id="@+id/activity_main_drawer_profile"
+            android:icon="@android:drawable/ic_menu_gallery"
+            android:id="@+id/TopstoriesDrawer"
             android:title="@string/Top_Stories" />
         <item
-            android:id="@+id/activity_main_drawer_settings"
+            android:icon="@android:drawable/ic_menu_gallery"
+            android:id="@+id/MostPopularDrawer"
             android:title="@string/Most_Popular" />
         <item
-            android:id="@+id/user"
+            android:icon="@android:drawable/ic_menu_gallery"
+            android:id="@+id/UserSectionDrawer"
             android:title="@string/User_Section" />
     </group>
-</item>
-    <group android:checkableBehavior="single">
-        <item
-            android:id="@+id/notif"
-            android:title="@string/Notifications" />
-        <item
-            android:id="@+id/search"
-            android:title="@string/Search_articles" />
-    </group>
 
+    <item
+        android:title="Options">
+        <menu>
+            <item
+                android:icon="@android:drawable/ic_lock_idle_alarm"
+                android:id="@+id/notifDrawer"
+                android:title="@string/Notifications" />
+            <item
+                android:icon="@android:drawable/ic_menu_search"
+                android:id="@+id/searchDrawer"
+                android:title="@string/Search_articles" />
+        </menu>
+
+    </item>
 
 </menu>

@@ -26,7 +26,6 @@ import java.util.ArrayList;
 public class OptionsActivity extends AppCompatActivity implements CheckBox.OnCheckedChangeListener
 {
 
-
     private SharedPreferences sharedPreferences;
     private ArrayList<CheckBox> boxes;
     private EditText editTextQueryTerms;

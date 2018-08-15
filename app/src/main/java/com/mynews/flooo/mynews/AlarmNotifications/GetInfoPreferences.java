@@ -89,7 +89,6 @@ public class GetInfoPreferences
 
         }
 
-        //sectionsString.deleteCharAt(sectionsString.length()-1);
         sectionsString.append(")");
         String sections= sectionsString.toString();
         System.out.println(sections);

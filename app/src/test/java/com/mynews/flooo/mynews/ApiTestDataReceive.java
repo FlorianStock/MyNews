@@ -7,6 +7,7 @@ import com.mynews.flooo.mynews.ApiRest.Results;
 import org.junit.Before;
 import org.junit.Test;
 
+import static org.junit.Assert.fail;
 
 
 /**
@@ -44,8 +45,8 @@ public class ApiTestDataReceive implements ApiCalls.Callbacks
     @Test
     public void callGetSection()
     {
+        ApiCalls.getSection(this,"world");
 
-        ApiCalls.getMostPopular(this);
     }
 
 

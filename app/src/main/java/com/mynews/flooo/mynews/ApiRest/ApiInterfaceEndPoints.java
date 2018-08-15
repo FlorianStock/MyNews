@@ -7,6 +7,7 @@ import com.google.gson.GsonBuilder;
 
 import java.text.DateFormat;
 import java.util.List;
+import java.util.Map;
 
 import retrofit2.Call;
 import retrofit2.Retrofit;
@@ -14,6 +15,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
+import retrofit2.http.QueryMap;
 
 public interface ApiInterfaceEndPoints
 {
@@ -27,8 +29,14 @@ public interface ApiInterfaceEndPoints
     Call<Results> getMostPopular(@Query("api-key") String apiKey);
 
 
+    @GET("svc/search/v2/articlesearch.json")
+    Call<Results> getNews(@Query("api-key") String apiKey,
+                          @QueryMap Map<String,String> filters);
+
+    GsonAdapterLists gsonAdapterLists = new GsonAdapterLists();
+
     Gson gson = new GsonBuilder()
-            .registerTypeAdapter(Results.class, new GsonAdapterLists())
+            .registerTypeAdapter(Results.class, gsonAdapterLists)
             .setDateFormat(DateFormat.LONG)
             .setFieldNamingPolicy(FieldNamingPolicy.UPPER_CAMEL_CASE)
             .setPrettyPrinting()
@@ -40,5 +48,7 @@ public interface ApiInterfaceEndPoints
             .baseUrl("https://api.nytimes.com/")
             .addConverterFactory(GsonConverterFactory.create(gson))
             .build();
+
+
 
 }

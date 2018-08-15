@@ -1,0 +1,7 @@
+language: android
+android:
+    components:
+    - build-tools-28
+    - android-28
+    script:
+ - chmod +x ./gradlew build connectedCheck

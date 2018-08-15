@@ -1,8 +1,25 @@
 <resources>
     <string name="app_name">My News</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
+
+    <string name="Top_Stories">Top Stories</string>
+    <string name = "Most_Popular">Most Popular</string>
+    <string name="User_Section">World</string>
+
+
+    <string name="Search_articles">Search articles</string>
+    <string name="Notifications">Notifications</string>
+
+    <string name="about">Developed by Florian Stock, for a OpenClassroom Project</string>
+    <string name="headerImage">https://static.nytimes.com/images/icons/ios-ipad-144x144.png</string>
+
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_options">OptionsActivity</string>
+    <string name="title_activity_main2">Main2Activity</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_results">ResultsActivity</string>
 
 
 </resources>

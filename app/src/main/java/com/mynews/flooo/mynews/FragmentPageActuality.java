@@ -13,7 +13,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.mynews.flooo.mynews.AlarmNotifications.GetInfoPreferences;
 import com.mynews.flooo.mynews.ApiRest.ApiCalls;
+import com.mynews.flooo.mynews.ApiRest.News;
 import com.mynews.flooo.mynews.ApiRest.Results;
 
 
@@ -64,20 +67,25 @@ public class FragmentPageActuality extends Fragment implements ApiCalls.Callback
         RecyclerView recyclerView = view.findViewById(R.id.listNews);
         recyclerView.setLayoutManager(new LinearLayoutManager(container.getContext()));
 
+        if(listnews!=null){this.listnews.clear();}
+
         this.listnews = new Results();
 
-        //ApiCalls.getSection(this,page);
-
-        System.out.println(page);
 
         switch(page)
         {
-            case "Top Stories": ApiCalls.getTopStories(this);break;
-            case "Most Popular":ApiCalls.getMostPopular(this);break;
-            default: ApiCalls.getSection(this,page.toLowerCase());break;
+            case "Top Stories":
+                ApiCalls.getTopStories(this);
+                break;
+            case "Most Popular":
+                ApiCalls.getMostPopular(this);
+                break;
+            case "world":
+                ApiCalls.getSection(this,"world");
+                break;
+
+            //default:  ApiCalls.getTopStories(this);
         }
-
-
 
         this.adapterRecyclerView = new AdapterRecyclerView(this.listnews,this.getContext(),page);
         recyclerView.setAdapter(this.adapterRecyclerView);
@@ -112,8 +120,10 @@ public class FragmentPageActuality extends Fragment implements ApiCalls.Callback
         //System.out.println(listResultsJson.size());
         if(listResultsJson!=null)
         {
-            //Log.e("CallBackOnSucess", listResultsJson.get(0).getTitle());
+            //Log.e("CallBackOnSucess", listResultsJson.get(0).get(0).getFormat());
 
+
+            listnews.clear();
             listnews.addAll(listResultsJson) ;
             adapterRecyclerView.notifyDataSetChanged();
         }

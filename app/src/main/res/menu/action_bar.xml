@@ -7,22 +7,25 @@
         android:id="@+id/action_search"
         android:icon="@android:drawable/ic_menu_search"
         app:showAsAction="always"
+        android:title="Search"
         tools:icon="@android:drawable/ic_menu_search">
 
     </item>
 
     <item
-        android:id="@+id/action_add"
+        android:id="@+id/notifications"
         android:title="Notifications"
-        app:showAsAction="ifRoom">
+        app:showAsAction="never">
     </item>
 
     <item
+        android:id="@+id/menu_help"
         android:title="Help"
-        app:showAsAction="ifRoom">
+        app:showAsAction="never">
     </item>
 
     <item
+        android:id="@+id/menu_about"
         android:title="About"
         app:showAsAction="never">
     </item>

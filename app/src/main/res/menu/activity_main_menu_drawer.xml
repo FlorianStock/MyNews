@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:icon="@android:drawable/ic_menu_gallery"
+            android:id="@+id/TopstoriesDrawer"
+            android:title="@string/Top_Stories" />
+        <item
+            android:icon="@android:drawable/ic_menu_gallery"
+            android:id="@+id/MostPopularDrawer"
+            android:title="@string/Most_Popular" />
+        <item
+            android:icon="@android:drawable/ic_menu_gallery"
+            android:id="@+id/UserSectionDrawer"
+            android:title="@string/User_Section" />
+    </group>
+
+    <item
+        android:title="Options">
+        <menu>
+            <item
+                android:icon="@android:drawable/ic_lock_idle_alarm"
+                android:id="@+id/notifDrawer"
+                android:title="@string/Notifications" />
+            <item
+                android:icon="@android:drawable/ic_menu_search"
+                android:id="@+id/searchDrawer"
+                android:title="@string/Search_articles" />
+        </menu>
+
+    </item>
+
+</menu>

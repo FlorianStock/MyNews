@@ -4,25 +4,17 @@ import android.app.AlarmManager;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
-import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.media.RingtoneManager;
 import android.os.Build;
-import android.os.PowerManager;
-import android.preference.PreferenceManager;
-import android.support.annotation.Nullable;
 import android.support.v4.app.NotificationCompat;
 
-import com.mynews.flooo.mynews.ApiRest.News;
-import com.mynews.flooo.mynews.ApiRest.Results;
-import com.mynews.flooo.mynews.MainActivity;
-import com.mynews.flooo.mynews.OptionsActivity;
+import com.mynews.flooo.mynews.Models.Results;
 import com.mynews.flooo.mynews.R;
-import com.mynews.flooo.mynews.ResultsActivity;
+import com.mynews.flooo.mynews.Activities.ResultsActivity;
 
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 
@@ -43,8 +35,8 @@ public class AlarmNotifications
 
         Calendar calendar = Calendar.getInstance();
 
-        calendar.set(Calendar.HOUR_OF_DAY, 3); // For 1 PM or 2 PM
-        calendar.set(Calendar.MINUTE, 20);
+        calendar.set(Calendar.HOUR_OF_DAY, 7); // For 1 PM or 2 PM
+        calendar.set(Calendar.MINUTE, 30);
         calendar.set(Calendar.SECOND, 0);
 
         PendingIntent pi = PendingIntent.getBroadcast(context, 0, i, 0);

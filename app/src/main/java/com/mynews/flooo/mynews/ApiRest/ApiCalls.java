@@ -4,10 +4,9 @@ package com.mynews.flooo.mynews.ApiRest;
 import android.support.annotation.Nullable;
 import android.util.Log;
 
-import com.mynews.flooo.mynews.OptionsActivity;
+import com.mynews.flooo.mynews.Models.Results;
 
 import java.lang.ref.WeakReference;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 

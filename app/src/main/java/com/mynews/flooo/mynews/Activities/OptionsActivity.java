@@ -1,4 +1,4 @@
-package com.mynews.flooo.mynews;
+package com.mynews.flooo.mynews.Activities;
 
 import android.content.Context;
 import android.content.Intent;
@@ -19,7 +19,8 @@ import android.widget.Toast;
 
 import com.mynews.flooo.mynews.AlarmNotifications.AlarmNotifications;
 import com.mynews.flooo.mynews.AlarmNotifications.AlarmOnReceive;
-import com.mynews.flooo.mynews.AlarmNotifications.GetInfoPreferences;
+import com.mynews.flooo.mynews.R;
+
 
 import java.util.ArrayList;
 
@@ -30,6 +31,7 @@ public class OptionsActivity extends AppCompatActivity implements CheckBox.OnChe
     private ArrayList<CheckBox> boxes;
     private EditText editTextQueryTerms;
     private  String optionsStatus;
+    private Switch notificationSwitch;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -151,7 +153,7 @@ public class OptionsActivity extends AppCompatActivity implements CheckBox.OnChe
     }
     private void notificationState(Context getContext,View view)
     {
-        Switch notificationSwitch = view.findViewById(R.id.switch_notif);
+        notificationSwitch = view.findViewById(R.id.switch_notif);
         notificationSwitch.setChecked(sharedPreferences.getBoolean("Notifications",false));
 
 
@@ -233,6 +235,15 @@ public class OptionsActivity extends AppCompatActivity implements CheckBox.OnChe
                     sharedPreferences.edit().putBoolean(checkBox.getTag().toString(),false).apply();
                 }
             }
+
+        }
+
+        if(!VerifyAtLeastOneCheckBox() && optionsStatus.equals("Notifications"))
+        {
+            notificationSwitch.setChecked(false);
+            sharedPreferences.edit().putBoolean("Notifications",false).apply();
+            AlarmNotifications alarmNotifs = new AlarmNotifications();
+            alarmNotifs.cancelAlarm(this.getApplicationContext());
         }
 
     }

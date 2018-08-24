@@ -1,11 +1,9 @@
 package com.mynews.flooo.mynews;
 
 import android.content.Context;
-import android.support.v4.view.ViewPager;
 
 import com.mynews.flooo.mynews.AlarmNotifications.AlarmNotifications;
-import com.mynews.flooo.mynews.ApiRest.ApiCalls;
-import com.mynews.flooo.mynews.ApiRest.Results;
+import com.mynews.flooo.mynews.Models.Results;
 
 import org.junit.Before;
 import org.junit.Test;

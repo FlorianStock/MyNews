@@ -1,10 +1,9 @@
-package com.mynews.flooo.mynews;
+package com.mynews.flooo.mynews.UI;
 
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.view.View;
 
 import java.util.ArrayList;
 

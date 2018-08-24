@@ -1,4 +1,4 @@
-package com.mynews.flooo.mynews;
+package com.mynews.flooo.mynews.UI;
 
 
 import android.content.Context;
@@ -9,12 +9,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.mynews.flooo.mynews.Activities.WebViewActivity;
 import com.mynews.flooo.mynews.ApiRest.FormatDataImage;
-import com.mynews.flooo.mynews.ApiRest.News;
-import com.mynews.flooo.mynews.ApiRest.Results;
+import com.mynews.flooo.mynews.Models.News;
+import com.mynews.flooo.mynews.Models.Results;
+import com.mynews.flooo.mynews.R;
 import com.squareup.picasso.Picasso;
 
-import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;

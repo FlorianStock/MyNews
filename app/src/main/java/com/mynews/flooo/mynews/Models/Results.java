@@ -1,7 +1,4 @@
-package com.mynews.flooo.mynews.ApiRest;
-
-import com.google.gson.annotations.Expose;
-import com.google.gson.annotations.SerializedName;
+package com.mynews.flooo.mynews.Models;
 
 import java.util.ArrayList;
 

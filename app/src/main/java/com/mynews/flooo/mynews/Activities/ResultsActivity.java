@@ -1,23 +1,18 @@
-package com.mynews.flooo.mynews;
+package com.mynews.flooo.mynews.Activities;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.view.View;
-import android.widget.CheckBox;
 
-import com.mynews.flooo.mynews.AlarmNotifications.GetInfoPreferences;
+import com.mynews.flooo.mynews.UI.AdapterRecyclerView;
+import com.mynews.flooo.mynews.ApiRest.BuildRequest;
 import com.mynews.flooo.mynews.ApiRest.ApiCalls;
-import com.mynews.flooo.mynews.ApiRest.Results;
-
-import java.io.Serializable;
-import java.util.ArrayList;
+import com.mynews.flooo.mynews.Models.Results;
+import com.mynews.flooo.mynews.R;
 
 public class ResultsActivity extends AppCompatActivity implements ApiCalls.Callbacks
 {
@@ -36,7 +31,7 @@ public class ResultsActivity extends AppCompatActivity implements ApiCalls.Callb
         Intent in = getIntent();
         Bundle bundle = in.getExtras();
 
-        GetInfoPreferences getInfo = new GetInfoPreferences();
+        BuildRequest getInfo = new BuildRequest();
 
         if(bundle!=null)
         {

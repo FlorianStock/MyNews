@@ -4,9 +4,9 @@ package com.mynews.flooo.mynews.ApiRest;
 import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.mynews.flooo.mynews.Models.Results;
 
 import java.text.DateFormat;
-import java.util.List;
 import java.util.Map;
 
 import retrofit2.Call;
@@ -22,7 +22,7 @@ public interface ApiInterfaceEndPoints
     // Top stories
     @GET("svc/topstories/v2/{section}.json")
     Call<Results>getTopStories(@Path("section") String section,
-                                @Query("api-key") String API_KEY);
+                               @Query("api-key") String API_KEY);
 
     // Most Popular API
     @GET("svc/mostpopular/v2/mostshared/all-sections/30.json")

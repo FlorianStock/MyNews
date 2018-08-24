@@ -1,5 +1,7 @@
-package com.mynews.flooo.mynews.ApiRest;
+package com.mynews.flooo.mynews.Models;
 
+
+import com.mynews.flooo.mynews.ApiRest.FormatDataImage;
 
 import java.util.ArrayList;
 

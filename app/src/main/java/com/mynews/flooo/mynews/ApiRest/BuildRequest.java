@@ -1,4 +1,4 @@
-package com.mynews.flooo.mynews.AlarmNotifications;
+package com.mynews.flooo.mynews.ApiRest;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class GetInfoPreferences
+public class BuildRequest
 {
 
     private SharedPreferences sharedPreferences;
@@ -81,7 +81,7 @@ public class GetInfoPreferences
 
             if(entry.getValue())
             {
-                sectionsString.append(" \"");
+                sectionsString.append("\"");
                 sectionsString.append(entry.getKey());
                 sectionsString.append("\" ");
 

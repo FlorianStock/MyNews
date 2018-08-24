@@ -3,11 +3,11 @@ package com.mynews.flooo.mynews.AlarmNotifications;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.os.PowerManager;
 import android.support.annotation.Nullable;
 
 import com.mynews.flooo.mynews.ApiRest.ApiCalls;
-import com.mynews.flooo.mynews.ApiRest.Results;
+import com.mynews.flooo.mynews.ApiRest.BuildRequest;
+import com.mynews.flooo.mynews.Models.Results;
 
 public class AlarmOnReceive extends BroadcastReceiver implements  ApiCalls.Callbacks
 {
@@ -20,7 +20,7 @@ public class AlarmOnReceive extends BroadcastReceiver implements  ApiCalls.Callb
 
 
 
-        GetInfoPreferences getInfo = new GetInfoPreferences();
+        BuildRequest getInfo = new BuildRequest();
         String sections = getInfo.buildSectionsStringForNotification(context);
         String queryTerm = getInfo.getQueryTerm();
 

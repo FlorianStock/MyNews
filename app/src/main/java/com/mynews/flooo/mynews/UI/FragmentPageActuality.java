@@ -1,51 +1,31 @@
-package com.mynews.flooo.mynews;
+package com.mynews.flooo.mynews.UI;
 
-import android.app.Activity;
-import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
-import android.service.autofill.Dataset;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.mynews.flooo.mynews.AlarmNotifications.GetInfoPreferences;
 import com.mynews.flooo.mynews.ApiRest.ApiCalls;
-import com.mynews.flooo.mynews.ApiRest.News;
-import com.mynews.flooo.mynews.ApiRest.Results;
-
-
-import org.json.JSONException;
-
-import java.lang.reflect.Type;
-import java.net.MalformedURLException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.zip.Inflater;
+import com.mynews.flooo.mynews.Models.Results;
+import com.mynews.flooo.mynews.R;
 
 
 public class FragmentPageActuality extends Fragment implements ApiCalls.Callbacks
 {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String PAGE = "PageName";
-    private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
+    private static final String PAGE = "PageName";
     private String page;
-    private String mParam2;
+
 
     private AdapterRecyclerView adapterRecyclerView;
     private Results listnews;
 
 
-
-    // TODO: Rename and change types and number of parameters
     public static FragmentPageActuality newInstance(String page)
     {
         FragmentPageActuality fragment = new FragmentPageActuality();
@@ -84,13 +64,13 @@ public class FragmentPageActuality extends Fragment implements ApiCalls.Callback
                 ApiCalls.getSection(this,"world");
                 break;
 
-            //default:  ApiCalls.getTopStories(this);
+
         }
 
         this.adapterRecyclerView = new AdapterRecyclerView(this.listnews,this.getContext(),page);
         recyclerView.setAdapter(this.adapterRecyclerView);
 
-        // Inflate the layout for this fragment
+
         return view;
 
 

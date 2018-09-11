@@ -2,7 +2,7 @@ package com.mynews.flooo.mynews;
 
 
 
-import com.mynews.flooo.mynews.ApiRest.BuildRequest;
+import com.mynews.flooo.mynews.Controllers.ApiRest.BuildRequest;
 
 
 import org.junit.Before;

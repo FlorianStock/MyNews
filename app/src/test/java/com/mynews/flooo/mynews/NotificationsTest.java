@@ -2,7 +2,8 @@ package com.mynews.flooo.mynews;
 
 import android.content.Context;
 
-import com.mynews.flooo.mynews.AlarmNotifications.AlarmNotifications;
+import com.mynews.flooo.mynews.Controllers.AlarmNotifications.AlarmNotifications;
+import com.mynews.flooo.mynews.Models.News;
 import com.mynews.flooo.mynews.Models.Results;
 
 import org.junit.Before;
@@ -32,9 +33,21 @@ public class NotificationsTest
     @Test
     public void sendNotificationEmpty()
     {
-        Results testEmpty = new Results();
-        AlarmNotifications alarmNotifications = Mockito.mock(AlarmNotifications.class);
-        alarmNotifications.createNotification(testEmpty,context);
+        Results testList = new Results();
 
+
+        testList.add(newsAlea());
+
+        AlarmNotifications alarmNotifications = Mockito.mock(AlarmNotifications.class);
+        alarmNotifications.createNotification(testList,context);
+
+    }
+
+    private News  newsAlea  ()
+    {
+        News news = new News();
+        news.setSection("World");
+        news.setTitle("Title");
+        return news;
     }
 }

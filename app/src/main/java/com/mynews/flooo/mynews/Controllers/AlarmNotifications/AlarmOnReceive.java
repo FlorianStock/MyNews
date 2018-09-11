@@ -1,12 +1,12 @@
-package com.mynews.flooo.mynews.AlarmNotifications;
+package com.mynews.flooo.mynews.Controllers.AlarmNotifications;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.Nullable;
 
-import com.mynews.flooo.mynews.ApiRest.ApiCalls;
-import com.mynews.flooo.mynews.ApiRest.BuildRequest;
+import com.mynews.flooo.mynews.Controllers.ApiRest.ApiCalls;
+import com.mynews.flooo.mynews.Controllers.ApiRest.BuildRequest;
 import com.mynews.flooo.mynews.Models.Results;
 
 public class AlarmOnReceive extends BroadcastReceiver implements  ApiCalls.Callbacks

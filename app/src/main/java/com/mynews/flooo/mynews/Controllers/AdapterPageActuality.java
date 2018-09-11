@@ -1,4 +1,4 @@
-package com.mynews.flooo.mynews.UI;
+package com.mynews.flooo.mynews.Controllers;
 
 
 import android.support.v4.app.Fragment;

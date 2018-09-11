@@ -1,4 +1,4 @@
-package com.mynews.flooo.mynews.AlarmNotifications;
+package com.mynews.flooo.mynews.Controllers.AlarmNotifications;
 
 import android.app.AlarmManager;
 import android.app.NotificationChannel;
@@ -13,7 +13,7 @@ import android.support.v4.app.NotificationCompat;
 
 import com.mynews.flooo.mynews.Models.Results;
 import com.mynews.flooo.mynews.R;
-import com.mynews.flooo.mynews.Activities.ResultsActivity;
+import com.mynews.flooo.mynews.Controllers.ResultsActivity;
 
 import java.util.Calendar;
 import java.util.HashMap;

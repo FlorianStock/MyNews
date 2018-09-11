@@ -1,4 +1,4 @@
-package com.mynews.flooo.mynews.Activities;
+package com.mynews.flooo.mynews.Controllers;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,9 +8,8 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 
-import com.mynews.flooo.mynews.UI.AdapterRecyclerView;
-import com.mynews.flooo.mynews.ApiRest.BuildRequest;
-import com.mynews.flooo.mynews.ApiRest.ApiCalls;
+import com.mynews.flooo.mynews.Controllers.ApiRest.BuildRequest;
+import com.mynews.flooo.mynews.Controllers.ApiRest.ApiCalls;
 import com.mynews.flooo.mynews.Models.Results;
 import com.mynews.flooo.mynews.R;
 

@@ -1,4 +1,4 @@
-package com.mynews.flooo.mynews.Activities;
+package com.mynews.flooo.mynews.Controllers;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;

@@ -17,7 +17,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorBckground"
-    tools:context=".Activities.MainActivity">
+    tools:context=".Controllers.MainActivity">
 
 
     <android.support.v7.widget.Toolbar
@@ -27,7 +27,6 @@
         android:layout_alignParentTop="true"
         android:background="@color/colorPrimary"
         android:elevation="6dp"
-        android:minHeight="?attr/actionBarSize"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
 
@@ -38,7 +37,6 @@
         android:layout_below="@+id/toolbar"
         android:background="@color/colorPrimary"
         android:elevation="5dp"
-        android:minHeight="?attr/actionBarSize"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
         app:tabIndicatorColor="@android:color/holo_red_dark"
         app:tabTextColor="@android:color/background_light" />

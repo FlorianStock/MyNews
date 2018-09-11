@@ -1,4 +1,4 @@
-package com.mynews.flooo.mynews.ApiRest;
+package com.mynews.flooo.mynews.Controllers.ApiRest;
 
 
 import com.google.gson.FieldNamingPolicy;

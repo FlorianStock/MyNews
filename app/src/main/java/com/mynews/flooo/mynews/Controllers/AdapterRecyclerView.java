@@ -1,4 +1,4 @@
-package com.mynews.flooo.mynews.UI;
+package com.mynews.flooo.mynews.Controllers;
 
 
 import android.content.Context;
@@ -10,8 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.mynews.flooo.mynews.Activities.WebViewActivity;
-import com.mynews.flooo.mynews.ApiRest.FormatDataImage;
+import com.mynews.flooo.mynews.Models.FormatDataImage;
 import com.mynews.flooo.mynews.Models.News;
 import com.mynews.flooo.mynews.Models.Results;
 import com.mynews.flooo.mynews.R;

@@ -16,7 +16,6 @@ cache:
 android:
   components:
   - tools
-  - tools # Running this twice get's the latest build tools (https://github.com/codepath/android_guides/wiki/Setting-up-Travis-CI)
   - platform-tools
   - android-28
   - build-tools-28.0.0
@@ -24,3 +23,6 @@ android:
 
 script:
 - chmod +x ./gradlew
+
+after_success:
+  - bash <(curl -s https://codecov.io/bash)

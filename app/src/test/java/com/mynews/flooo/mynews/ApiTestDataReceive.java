@@ -2,7 +2,7 @@ package com.mynews.flooo.mynews;
 
 import android.support.annotation.Nullable;
 
-import com.mynews.flooo.mynews.ApiRest.ApiCalls;
+import com.mynews.flooo.mynews.Controllers.ApiRest.ApiCalls;
 import com.mynews.flooo.mynews.Models.Results;
 import org.junit.Before;
 import org.junit.Test;

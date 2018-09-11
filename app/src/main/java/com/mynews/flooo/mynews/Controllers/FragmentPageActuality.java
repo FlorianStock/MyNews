@@ -1,4 +1,4 @@
-package com.mynews.flooo.mynews.UI;
+package com.mynews.flooo.mynews.Controllers;
 
 import android.net.Uri;
 import android.os.Bundle;
@@ -10,7 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.mynews.flooo.mynews.ApiRest.ApiCalls;
+import com.mynews.flooo.mynews.Controllers.ApiRest.ApiCalls;
 import com.mynews.flooo.mynews.Models.Results;
 import com.mynews.flooo.mynews.R;
 

@@ -1,10 +1,11 @@
-package com.mynews.flooo.mynews.ApiRest;
+package com.mynews.flooo.mynews.Controllers.ApiRest;
 
 
 import com.google.gson.TypeAdapter;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonToken;
 import com.google.gson.stream.JsonWriter;
+import com.mynews.flooo.mynews.Models.FormatDataImage;
 import com.mynews.flooo.mynews.Models.News;
 import com.mynews.flooo.mynews.Models.Results;
 

@@ -1,4 +1,4 @@
-package com.mynews.flooo.mynews.Activities;
+package com.mynews.flooo.mynews.Controllers;
 
 import android.content.Context;
 import android.content.Intent;
@@ -17,8 +17,8 @@ import android.widget.LinearLayout;
 import android.widget.Switch;
 import android.widget.Toast;
 
-import com.mynews.flooo.mynews.AlarmNotifications.AlarmNotifications;
-import com.mynews.flooo.mynews.AlarmNotifications.AlarmOnReceive;
+import com.mynews.flooo.mynews.Controllers.AlarmNotifications.AlarmNotifications;
+import com.mynews.flooo.mynews.Controllers.AlarmNotifications.AlarmOnReceive;
 import com.mynews.flooo.mynews.R;
 
 

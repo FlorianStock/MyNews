@@ -1,9 +1,9 @@
-package com.mynews.flooo.mynews.ApiRest;
+package com.mynews.flooo.mynews.Controllers.ApiRest;
 
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
-import android.widget.CheckBox;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;

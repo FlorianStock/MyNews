@@ -1,4 +1,4 @@
-package com.mynews.flooo.mynews.Activities;
+package com.mynews.flooo.mynews.Controllers;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -18,7 +18,6 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 
-import com.mynews.flooo.mynews.UI.AdapterPageActuality;
 import com.mynews.flooo.mynews.R;
 import com.squareup.picasso.Picasso;
 

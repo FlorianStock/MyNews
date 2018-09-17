@@ -30,7 +30,7 @@ public class BuildRequestTest
         String queryTerm = "This is a test for a query request.";
         String queryTermbuilded = new BuildRequest().queryTermBuild(queryTerm);
 
-        assertEquals("This+is+a+test+for+query+request+.", queryTermbuilded);
+        assertEquals("This+is+a+test+for+a+query+request.+", queryTermbuilded);
 
     }
 

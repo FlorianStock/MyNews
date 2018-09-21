@@ -5,15 +5,20 @@ import android.support.annotation.Nullable;
 import android.util.Log;
 
 import com.mynews.flooo.mynews.Models.Results;
-
 import java.lang.ref.WeakReference;
 import java.util.HashMap;
 import java.util.Map;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+
+/*
+//////////////////////////////////////////////////////////////////////////
+This is a class what i used for Call Request Everywhere in my application with statics functions.
+//////////////////////////////////////////////////////////////////////////
+
+ */
 
 public class ApiCalls
 {
@@ -21,18 +26,12 @@ public class ApiCalls
         private static final String API_KEY = "f06e19cbd14d467d9f345b263f9c3cfe";
 
 
-
-
-    // 1 - Creating a callback
+    // Creating a callback
         public interface Callbacks
         {
             void onResponse(@Nullable Results listNews);
             void onFailure();
         }
-
-
-
-        // 2 - Public method to start fetching users following by Jake Wharton
 
 
         public  static void getTopStories(Callbacks callbacks)
@@ -67,7 +66,6 @@ public class ApiCalls
         //Search with date
         //mapQueryInfo.put("begin_date","newest");
         //mapQueryInfo.put("end_date","newest");
-        //Query terms
 
        if(QueryTerms!=null){mapQueryInfo.put("q", QueryTerms);}
 
@@ -81,6 +79,8 @@ public class ApiCalls
         Call <Results> call = apiInterfaceEndPoints.getNews(API_KEY,mapQueryInfo);
         EnqueueCall(call,callbacks);
     }
+
+
 
         private static void EnqueueCall(Call call, Callbacks callbacks )
         {

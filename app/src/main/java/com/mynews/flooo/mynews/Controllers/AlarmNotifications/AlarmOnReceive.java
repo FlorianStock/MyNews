@@ -9,10 +9,21 @@ import com.mynews.flooo.mynews.Controllers.ApiRest.ApiCalls;
 import com.mynews.flooo.mynews.Controllers.ApiRest.BuildRequest;
 import com.mynews.flooo.mynews.Models.Results;
 
+
+// This class is separate of the application.
+// I use a receiver in the manifest file to run this thread.
+
+// When the alarm is active, we run this class
+
+
 public class AlarmOnReceive extends BroadcastReceiver implements  ApiCalls.Callbacks
 {
 
     private Context context;
+
+
+    //Creation of request and the notification
+
     @Override
     public void onReceive(Context context, Intent intent)
     {

@@ -22,11 +22,8 @@ import java.util.HashMap;
 public class AlarmNotifications
 {
 
-    SharedPreferences sharedPreferences;
-    HashMap<String, Boolean> checkBoxStates;
 
-
-
+    // I set alarm with AlarmManager and PendingIntent class
 
     public void setAlarm(Context context)
     {
@@ -43,6 +40,8 @@ public class AlarmNotifications
         am.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),AlarmManager.INTERVAL_DAY ,pi); // Millisec * Second * Minute
     }
 
+    // I used the method cancel to delete the alarm
+
     public void cancelAlarm(Context context)
     {
         Intent intent = new Intent(context, AlarmNotifications.class);
@@ -51,6 +50,11 @@ public class AlarmNotifications
         alarmManager.cancel(sender);
     }
 
+
+
+    // The creation of notification is complicate, because we have many versions of Android, and libraries.
+    //  I used Notification manager and the Notification Channel if and only if the version of Android is > version 8.0
+    // A intent is create to go in the application to the ResultsActivity
 
     public void createNotification(Results results,Context context)
     {
@@ -66,10 +70,10 @@ public class AlarmNotifications
 
         inboxStyle.addLine(sizeNews+" articles newest may  to be interest you !");
 
-        // 3 - Create a Channel (Android 8)
+        // Create a Channel (Android 8)
         String channelId = "0";
 
-        // 4 - Build a Notification object
+        //Build a Notification object
         NotificationCompat.Builder notificationBuilder =
                 new NotificationCompat.Builder(context, channelId)
                         .setSmallIcon(R.drawable.ic_launcher_foreground)
@@ -80,10 +84,10 @@ public class AlarmNotifications
                         .setContentIntent(pendingIntent)
                         .setStyle(inboxStyle);
 
-        // 5 - Add the Notification to the Notification Manager and show it.
+       //Add the Notification to the Notification Manager and show it.
         NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
 
-        // 6 - Support Version >= Android 8
+        // Support Version >= Android 8
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O)
         {
             CharSequence channelName = "Message provenant de Firebase";
@@ -92,7 +96,7 @@ public class AlarmNotifications
             notificationManager.createNotificationChannel(mChannel);
         }
 
-        // 7 - Show notification
+        // Show notification
         notificationManager.notify("test", 0, notificationBuilder.build());
     }
 

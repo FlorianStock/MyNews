@@ -17,6 +17,12 @@ import retrofit2.http.Path;
 import retrofit2.http.Query;
 import retrofit2.http.QueryMap;
 
+
+// To use RETROFIT Library, we must to create a interface.
+// we send the endspoints of URL to get results.
+
+
+
 public interface ApiInterfaceEndPoints
 {
     // Top stories

@@ -38,7 +38,7 @@ public class NotificationsTest
 
         testList.add(newsAlea());
 
-        AlarmNotifications alarmNotifications = Mockito.mock(AlarmNotifications.class);
+        //AlarmNotifications alarmNotifications = Mockito.mock(AlarmNotifications.class);
         alarmNotifications.createNotification(testList,context);
 
     }

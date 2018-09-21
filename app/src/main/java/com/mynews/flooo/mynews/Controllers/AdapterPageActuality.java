@@ -8,6 +8,9 @@ import android.support.v4.app.FragmentPagerAdapter;
 import java.util.ArrayList;
 
 
+// This is my adapter for the pages for the  ViewPager
+//LINK Fragments with ViewPager.
+
 public class AdapterPageActuality extends FragmentPagerAdapter
 {
 
@@ -15,7 +18,7 @@ public class AdapterPageActuality extends FragmentPagerAdapter
     private ArrayList<String> tabTitles ;
 
 
-    // 2 - Default Constructor
+    // Default Constructor
     public AdapterPageActuality(FragmentManager mgr, ArrayList<String> tabTitles)
     {
         super(mgr);

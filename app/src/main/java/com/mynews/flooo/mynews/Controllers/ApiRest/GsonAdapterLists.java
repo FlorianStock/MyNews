@@ -13,6 +13,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 
+// This is my GSON class to deserialize manually the json requests.
+
 class GsonAdapterLists extends TypeAdapter<Results>
 {
 

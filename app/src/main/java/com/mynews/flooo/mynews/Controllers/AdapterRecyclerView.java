@@ -9,7 +9,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import com.mynews.flooo.mynews.Models.FormatDataImage;
 import com.mynews.flooo.mynews.Models.News;
 import com.mynews.flooo.mynews.Models.Results;
@@ -37,6 +36,8 @@ public class AdapterRecyclerView extends RecyclerView.Adapter<AdapterRecyclerVie
 
 
 
+    // Initialisation of the RecyclerView
+
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType)
     {
@@ -46,6 +47,9 @@ public class AdapterRecyclerView extends RecyclerView.Adapter<AdapterRecyclerVie
         return new MyViewHolder(view);
 
     }
+
+
+    // Updating the position when the user scroll...
 
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position)
@@ -58,6 +62,7 @@ public class AdapterRecyclerView extends RecyclerView.Adapter<AdapterRecyclerVie
     {
         return this.objectResults.size();
     }
+
 
 
 

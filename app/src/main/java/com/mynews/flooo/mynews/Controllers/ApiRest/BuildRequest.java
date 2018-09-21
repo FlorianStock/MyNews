@@ -8,6 +8,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+
+// This is a class who creating the request for the Api.
+
 public class BuildRequest
 {
 
@@ -16,6 +19,8 @@ public class BuildRequest
     private static String queryTerm;
 
 
+
+    // Building the query terms
 
     public String queryTermBuild(String input)
     {
@@ -34,14 +39,14 @@ public class BuildRequest
     }
 
 
+    // We used a hashmap to get the section who are enabled to the research
+    // The sections are loading with the SharedPreferences.
 
     public String buildSectionsStringForNotification(Context c)
     {
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(c);
 
         checkBoxStates.clear();
-
-
         checkBoxStates.put("Arts", sharedPreferences.getBoolean("Arts",true));
         checkBoxStates.put("Sports", sharedPreferences.getBoolean("Sports",true));
         checkBoxStates.put("Politics", sharedPreferences.getBoolean("Politics",true));

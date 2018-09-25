@@ -3,9 +3,9 @@ package com.mynews.flooo.mynews.Controllers.ApiRest;
 
 import android.support.annotation.Nullable;
 import android.util.Log;
-
 import com.mynews.flooo.mynews.Models.Results;
 import java.lang.ref.WeakReference;
+import java.text.ParseException;
 import java.util.HashMap;
 import java.util.Map;
 import retrofit2.Call;
@@ -29,7 +29,7 @@ public class ApiCalls
     // Creating a callback
         public interface Callbacks
         {
-            void onResponse(@Nullable Results listNews);
+            void onResponse(@Nullable Results listNews) throws ParseException;
             void onFailure();
         }
 
@@ -98,7 +98,11 @@ public class ApiCalls
                     if (callbacksWeakReference.get() != null && response.isSuccessful())
                     {
 
-                        callbacksWeakReference.get().onResponse(response.body());
+                        try {
+                            callbacksWeakReference.get().onResponse(response.body());
+                        } catch (ParseException e) {
+                            e.printStackTrace();
+                        }
                         callbacksWeakReference.clear();
                         Log.e("CallBackOnSucess", "Sucess JSON PARSE");
                     }

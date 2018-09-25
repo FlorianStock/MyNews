@@ -58,7 +58,7 @@ public class AlarmNotifications
 
     public boolean createNotification(Results results,Context context)
     {
-        System.out.println(results);
+
 
         if(results.size()>1)
         {

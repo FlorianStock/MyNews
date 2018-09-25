@@ -1,8 +1,11 @@
 package com.mynews.flooo.mynews;
 
 import android.content.Context;
+import android.support.annotation.Nullable;
 
 import com.mynews.flooo.mynews.Controllers.AlarmNotifications.AlarmNotifications;
+import com.mynews.flooo.mynews.Controllers.ApiRest.ApiCalls;
+import com.mynews.flooo.mynews.Models.FormatDataImage;
 import com.mynews.flooo.mynews.Models.News;
 import com.mynews.flooo.mynews.Models.Results;
 
@@ -12,9 +15,16 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.Duration;
+import java.time.LocalDate;
+import java.util.Date;
+
+import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.mock;
 
-public class NotificationsTest
+public class NotificationsTest implements ApiCalls.Callbacks
 {
 
     @Mock Context context;
@@ -31,23 +41,31 @@ public class NotificationsTest
     }
 
     @Test
-    public void sendNotificationEmpty()
+    public void sendNotification()
     {
-        Results testList = new Results();
+        //Test with a real list.
+        ApiCalls.getArticleSearch(this,"All","");
+        // Test with a  Empty List.
+        Results listEmpty = new Results();
+        Boolean stateFalse = alarmNotifications.createNotification(listEmpty,context);
+        assertEquals(false,stateFalse);
 
-
-        testList.add(newsAlea());
-
-        //AlarmNotifications alarmNotifications = Mockito.mock(AlarmNotifications.class);
-        alarmNotifications.createNotification(testList,context);
 
     }
 
-    private News  newsAlea  ()
+    @Override
+    public void onResponse(@Nullable Results listNews) throws ParseException
     {
-        News news = new News();
-        news.setSection("World");
-        news.setTitle("Title");
-        return news;
+        Boolean stateTrue = alarmNotifications.createNotification(listNews,context);
+        assertEquals(true,stateTrue);
     }
+
+    @Override
+    public void onFailure()
+    {
+
+    }
+
+
+
 }

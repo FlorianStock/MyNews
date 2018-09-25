@@ -56,48 +56,57 @@ public class AlarmNotifications
     //  I used Notification manager and the Notification Channel if and only if the version of Android is > version 8.0
     // A intent is create to go in the application to the ResultsActivity
 
-    public void createNotification(Results results,Context context)
+    public boolean createNotification(Results results,Context context)
     {
+        System.out.println(results);
 
-        Intent intent = new Intent(context, ResultsActivity.class);
-
-        PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_ONE_SHOT);
-
-        NotificationCompat.InboxStyle inboxStyle = new NotificationCompat.InboxStyle();
-        inboxStyle.setBigContentTitle("News Actualities");
-
-        String sizeNews =  Integer.toString(results.size());
-
-        inboxStyle.addLine(sizeNews+" articles newest may  to be interest you !");
-
-        // Create a Channel (Android 8)
-        String channelId = "0";
-
-        //Build a Notification object
-        NotificationCompat.Builder notificationBuilder =
-                new NotificationCompat.Builder(context, channelId)
-                        .setSmallIcon(R.drawable.ic_launcher_foreground)
-                        .setContentTitle("My News")
-                        .setContentText("content")
-                        .setAutoCancel(true)
-                        .setSound(RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION))
-                        .setContentIntent(pendingIntent)
-                        .setStyle(inboxStyle);
-
-       //Add the Notification to the Notification Manager and show it.
-        NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
-
-        // Support Version >= Android 8
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O)
+        if(results.size()>1)
         {
-            CharSequence channelName = "Message provenant de Firebase";
-            int importance = NotificationManager.IMPORTANCE_HIGH;
-            NotificationChannel mChannel = new NotificationChannel(channelId, channelName, importance);
-            notificationManager.createNotificationChannel(mChannel);
-        }
+            Intent intent = new Intent(context, ResultsActivity.class);
 
-        // Show notification
-        notificationManager.notify("test", 0, notificationBuilder.build());
+            PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_ONE_SHOT);
+
+            NotificationCompat.InboxStyle inboxStyle = new NotificationCompat.InboxStyle();
+            inboxStyle.setBigContentTitle("News Actualities");
+
+
+            String sizeNews = Integer.toString(results.size());
+
+            inboxStyle.addLine(sizeNews + " articles newest may  to be interest you !");
+
+            // Create a Channel (Android 8)
+            String channelId = "0";
+
+            //Build a Notification object
+            NotificationCompat.Builder notificationBuilder =
+                    new NotificationCompat.Builder(context, channelId)
+                            .setSmallIcon(R.drawable.ic_launcher_foreground)
+                            .setContentTitle("My News")
+                            .setContentText("content")
+                            .setAutoCancel(true)
+                            .setSound(RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION))
+                            .setContentIntent(pendingIntent)
+                            .setStyle(inboxStyle);
+
+            //Add the Notification to the Notification Manager and show it.
+            NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+
+            // Support Version >= Android 8
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                CharSequence channelName = "Message provenant de Firebase";
+                int importance = NotificationManager.IMPORTANCE_HIGH;
+                NotificationChannel mChannel = new NotificationChannel(channelId, channelName, importance);
+                notificationManager.createNotificationChannel(mChannel);
+            }
+
+            // Show notification
+            notificationManager.notify("test", 0, notificationBuilder.build());
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 
 

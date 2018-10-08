@@ -6,17 +6,16 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.media.RingtoneManager;
 import android.os.Build;
 import android.support.v4.app.NotificationCompat;
+import java.util.Calendar;
 
 import com.mynews.flooo.mynews.Models.Results;
 import com.mynews.flooo.mynews.R;
 import com.mynews.flooo.mynews.Controllers.ResultsActivity;
 
-import java.util.Calendar;
-import java.util.HashMap;
+
 
 
 public class AlarmNotifications
@@ -32,7 +31,7 @@ public class AlarmNotifications
 
         Calendar calendar = Calendar.getInstance();
 
-        calendar.set(Calendar.HOUR_OF_DAY, 7); // For 1 PM or 2 PM
+        calendar.set(Calendar.HOUR_OF_DAY, 7); // For 7 AM
         calendar.set(Calendar.MINUTE, 30);
         calendar.set(Calendar.SECOND, 0);
 

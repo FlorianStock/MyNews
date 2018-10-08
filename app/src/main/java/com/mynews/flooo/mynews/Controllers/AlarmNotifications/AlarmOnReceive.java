@@ -45,6 +45,7 @@ public class AlarmOnReceive extends BroadcastReceiver implements  ApiCalls.Callb
         alarmNotifications.createNotification(listNews,context);
     }
 
+    //Response if the connect is failure
     @Override
     public void onFailure()
     {

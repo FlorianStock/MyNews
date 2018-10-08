@@ -16,6 +16,8 @@ import com.mynews.flooo.mynews.R;
 public class ResultsActivity extends AppCompatActivity implements ApiCalls.Callbacks
 {
 
+    //This class show the result by a research.
+
     Results listNews;
     AdapterRecyclerView adapterRecyclerView;
     @Override
@@ -32,6 +34,8 @@ public class ResultsActivity extends AppCompatActivity implements ApiCalls.Callb
 
         BuildRequest getInfo = new BuildRequest();
 
+        // transition with results by search or by notification and go to the ApiCalls.class to get request
+
         if(bundle!=null)
         {
             toolbar.setTitle("Results by Search");
@@ -46,10 +50,14 @@ public class ResultsActivity extends AppCompatActivity implements ApiCalls.Callb
             ApiCalls.getArticleSearch(this,sections,getInfo.getQueryTerm());
         }
 
+
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
+
         listNews = new Results();
+
+        //Creation of the recylcerView to show the result
 
         RecyclerView recyclerView = findViewById(R.id.listSearch);
         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
@@ -67,12 +75,14 @@ public class ResultsActivity extends AppCompatActivity implements ApiCalls.Callb
         return true;
     }
 
+    // When we get restults notify the recycler view.
+
     @Override
     public void onResponse(@Nullable Results listResult)
     {
         if(listResult!=null)
         {
-            System.out.println(listResult.size());
+            //System.out.println(listResult.size());
 
             this.listNews.clear();
             this.listNews.addAll(listResult) ;

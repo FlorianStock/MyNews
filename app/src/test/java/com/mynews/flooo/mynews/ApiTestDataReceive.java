@@ -22,7 +22,6 @@ public class ApiTestDataReceive implements ApiCalls.Callbacks
 {
 
 
-    // We test the requests of the API, if we have results.
 
     @Before
     public void setUp() throws Exception

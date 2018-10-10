@@ -30,27 +30,24 @@ public class AlarmOnReceive extends BroadcastReceiver implements  ApiCalls.Callb
         this.context =context;
 
 
-        //Creation of REQUEST for URL
+
         BuildRequest getInfo = new BuildRequest();
         String sections = getInfo.buildSectionsStringForNotification(context);
         String queryTerm = getInfo.getQueryTerm();
 
-        //Call
         ApiCalls.getArticleSearch(this,sections,queryTerm);
     }
 
     @Override
     public void onResponse(@Nullable Results listNews)
     {
-        //Creation of Notification if a response exist
         AlarmNotifications alarmNotifications = new AlarmNotifications();
         alarmNotifications.createNotification(listNews,context);
     }
 
-
     @Override
     public void onFailure()
     {
-        //Response if the connect is failure
+
     }
 }

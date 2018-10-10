@@ -30,9 +30,9 @@ public class AlarmNotifications
         AlarmManager am =( AlarmManager)context.getSystemService(Context.ALARM_SERVICE);
         Intent i = new Intent(context, AlarmOnReceive.class);
 
+        // I use calendar to get the hour exactly
         Calendar calendar = Calendar.getInstance();
-
-        calendar.set(Calendar.HOUR_OF_DAY, 7); // For 1 PM or 2 PM
+        calendar.set(Calendar.HOUR_OF_DAY, 7); // For 7 PM
         calendar.set(Calendar.MINUTE, 30);
         calendar.set(Calendar.SECOND, 0);
 

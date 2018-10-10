@@ -27,6 +27,10 @@ import static org.mockito.Mockito.mock;
 public class NotificationsTest implements ApiCalls.Callbacks
 {
 
+
+    // We test if the notification have been create with request of api, and with a list Empty.
+
+
     @Mock Context context;
     @Mock AlarmNotifications alarmNotifications;
 

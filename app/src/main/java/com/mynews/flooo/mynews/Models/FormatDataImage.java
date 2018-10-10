@@ -2,6 +2,10 @@ package com.mynews.flooo.mynews.Models;
 
 public class FormatDataImage
 {
+
+    // The news extends FormatDatImage for a second list for the images
+
+
     private String url;
     private String format;
     private int width;

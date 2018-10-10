@@ -2,8 +2,6 @@ apply plugin: 'com.android.application'
 apply plugin: 'jacoco-android'
 
 android {
-    signingConfigs {
-    }
     compileSdkVersion 28
     defaultConfig {
         applicationId "com.mynews.flooo.mynews"
@@ -30,6 +28,7 @@ android {
 
 dependencies
         {
+
             implementation 'com.squareup.picasso:picasso:2.5.0'
             implementation 'com.squareup.retrofit2:converter-gson:2.4.0'
             implementation 'com.squareup.retrofit2:retrofit:2.4.0'

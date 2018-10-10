@@ -59,7 +59,7 @@ public class AlarmNotifications
     public boolean createNotification(Results results,Context context)
     {
 
-        //If we get results. The fist item is the second array extend.
+        //If we get results. The fist item is the second array extend..
 
         if(results.size()>1)
         {

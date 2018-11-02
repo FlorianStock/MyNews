@@ -2,6 +2,9 @@ package com.mynews.flooo.mynews.Models;
 
 public class FormatDataImage
 {
+
+    //This is the images format to show the image.
+
     private String url;
     private String format;
     private int width;

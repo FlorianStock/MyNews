@@ -36,36 +36,46 @@ public class MainActivity extends AppCompatActivity  implements NavigationView.O
     {
         super.onCreate(savedInstanceState);
 
+
+        //add the different categories for the TableLayout
         tabTitles.add("Top Stories");
         tabTitles.add("Most Popular");
         tabTitles.add("world");
 
         setContentView(R.layout.activity_main);
 
+        // Get the toolbar and set it
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        //Get tabLayout of the view xml
         TabLayout tabLayout = findViewById(R.id.tab_layout);
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
 
+
+        // CONFIGURATION OF VIEWPAGER WITH TableLayout
+        ////////////////////////////////////////////////////
         pager = findViewById(R.id.viewpager);
         pager.setAdapter(new AdapterPageActuality(getSupportFragmentManager(),tabTitles));
         pager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
 
+        // Attach the TabLayout with the viewPager
         tabLayout.setupWithViewPager(pager);
         tabLayout.setTabMode(TabLayout.MODE_FIXED);
         tabLayout.setInlineLabel(true);
 
+        // Configuration of Navigation Drawer
         DrawerLayout drawerLayout = findViewById(R.id.activity_main_drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.navigation_drawer_open,R.string.navigation_drawer_close);
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
 
+
         NavigationView navigationView =  findViewById(R.id.activity_main_nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
         View header = navigationView.getHeaderView(0);
-        ImageView headerDrawer = (ImageView) header.findViewById(R.id.imageViewHeaderNavigationDrawer);
+        ImageView headerDrawer = header.findViewById(R.id.imageViewHeaderNavigationDrawer);
         Picasso.with(this).load("https://static.nytimes.com/images/icons/ios-ipad-144x144.png").into(headerDrawer);
 
 
@@ -73,7 +83,7 @@ public class MainActivity extends AppCompatActivity  implements NavigationView.O
     }
 
 
-
+    // Inflate the menu to activity
     @Override
     public boolean onCreateOptionsMenu(Menu menu)
     {
@@ -81,7 +91,7 @@ public class MainActivity extends AppCompatActivity  implements NavigationView.O
         return true;
     }
 
-
+    //Listener for item clicked on menu
     @Override
     public boolean onOptionsItemSelected(MenuItem item)
     {
@@ -110,7 +120,7 @@ public class MainActivity extends AppCompatActivity  implements NavigationView.O
         return super.onOptionsItemSelected(item);
     }
 
-
+    //Listener for item clicked on menu NavigationDrawer
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem)
     {

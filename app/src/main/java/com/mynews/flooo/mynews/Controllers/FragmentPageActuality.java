@@ -52,6 +52,8 @@ public class FragmentPageActuality extends Fragment implements ApiCalls.Callback
         this.listnews = new Results();
 
 
+        //create api request with string id page
+
         switch(page)
         {
             case "Top Stories":
@@ -97,7 +99,7 @@ public class FragmentPageActuality extends Fragment implements ApiCalls.Callback
     public void onResponse(@Nullable Results listResultsJson)
     {
 
-        //System.out.println(listResultsJson.size());
+
         if(listResultsJson!=null)
         {
             //Log.e("CallBackOnSucess", listResultsJson.get(0).get(0).getFormat());

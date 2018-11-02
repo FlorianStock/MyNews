@@ -1,7 +1,7 @@
 package com.mynews.flooo.mynews.Models;
 
 
-
+//This is my "news model" who contains informations of news
 
 import java.util.ArrayList;
 

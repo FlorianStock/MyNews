@@ -18,6 +18,7 @@ public class ResultsActivity extends AppCompatActivity implements ApiCalls.Callb
 
     Results listNews;
     AdapterRecyclerView adapterRecyclerView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -31,6 +32,8 @@ public class ResultsActivity extends AppCompatActivity implements ApiCalls.Callb
         Bundle bundle = in.getExtras();
 
         BuildRequest getInfo = new BuildRequest();
+
+        //This activity is used for the results and for notifications, just the title of  the toolbar is changed
 
         if(bundle!=null)
         {

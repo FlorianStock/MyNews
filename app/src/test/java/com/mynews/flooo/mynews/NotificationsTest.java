@@ -24,6 +24,12 @@ import java.util.Date;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.mock;
 
+/**
+ * Test my Notifications class with real list, and list empty
+ *
+ *
+ */
+
 public class NotificationsTest implements ApiCalls.Callbacks
 {
 

@@ -11,6 +11,13 @@ import java.util.ArrayList;
 import static org.junit.Assert.assertEquals;
 
 
+/**
+ * Test my BuildRequest class for create requests
+ *
+ *
+ */
+
+
 public class BuildRequestTest
 {
 

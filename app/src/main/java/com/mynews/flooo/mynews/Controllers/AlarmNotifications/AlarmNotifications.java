@@ -58,7 +58,10 @@ public class AlarmNotifications
 
     public boolean createNotification(Results results,Context context)
     {
-        System.out.println(results);
+
+
+        //If we get results. The fist item is the second array extend..
+
 
         if(results.size()>1)
         {

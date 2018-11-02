@@ -23,15 +23,24 @@ This is a class what i used for Call Request Everywhere in my application with s
 public class ApiCalls
 {
 
+
+        //This is my key for API NY Times.
         private static final String API_KEY = "f06e19cbd14d467d9f345b263f9c3cfe";
 
 
-    // Creating a callback
+        // Creating a callback for response , for the interface with Recyclerview
+
+
+
+
+       // Creating a callback
+
         public interface Callbacks
         {
             void onResponse(@Nullable Results listNews) throws ParseException;
             void onFailure();
         }
+
 
 
         public  static void getTopStories(Callbacks callbacks)

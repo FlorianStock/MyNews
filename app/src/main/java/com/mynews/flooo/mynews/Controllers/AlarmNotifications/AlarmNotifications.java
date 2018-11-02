@@ -6,16 +6,17 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.media.RingtoneManager;
 import android.os.Build;
 import android.support.v4.app.NotificationCompat;
-import java.util.Calendar;
 
 import com.mynews.flooo.mynews.Models.Results;
 import com.mynews.flooo.mynews.R;
 import com.mynews.flooo.mynews.Controllers.ResultsActivity;
 
-
+import java.util.Calendar;
+import java.util.HashMap;
 
 
 public class AlarmNotifications
@@ -29,19 +30,18 @@ public class AlarmNotifications
         AlarmManager am =( AlarmManager)context.getSystemService(Context.ALARM_SERVICE);
         Intent i = new Intent(context, AlarmOnReceive.class);
 
-        //I use Calendar to get the day and the our exactly
+        // I use calendar to get the hour exactly
         Calendar calendar = Calendar.getInstance();
-
-        calendar.set(Calendar.HOUR_OF_DAY, 7); // For 7 AM
+        calendar.set(Calendar.HOUR_OF_DAY, 7); // For 7 PM
         calendar.set(Calendar.MINUTE, 30);
         calendar.set(Calendar.SECOND, 0);
 
-        //Creation of pendingIntent to set intent AlarmOnReceive for AlarmManager
         PendingIntent pi = PendingIntent.getBroadcast(context, 0, i, 0);
         am.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),AlarmManager.INTERVAL_DAY ,pi); // Millisec * Second * Minute
     }
 
     // I used the method cancel to delete the alarm
+
     public void cancelAlarm(Context context)
     {
         Intent intent = new Intent(context, AlarmNotifications.class);
@@ -59,7 +59,9 @@ public class AlarmNotifications
     public boolean createNotification(Results results,Context context)
     {
 
+
         //If we get results. The fist item is the second array extend..
+
 
         if(results.size()>1)
         {

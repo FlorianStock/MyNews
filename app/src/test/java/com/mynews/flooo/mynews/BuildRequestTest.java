@@ -11,12 +11,19 @@ import java.util.ArrayList;
 import static org.junit.Assert.assertEquals;
 
 
+/**
+ * Test my BuildRequest class for create requests
+ *
+ *
+ */
+
+
 public class BuildRequestTest
 {
 
 
-    //We test the build of the request, with an exemple.
-    // Build with quey terms, and build with category.
+
+
 
     @Before
     public void before() throws Exception

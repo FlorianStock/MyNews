@@ -12,10 +12,10 @@ public class WebViewActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState)
     {
 
-        //Show the article with WebView in a new activity, with parameter URL for show.
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_web_view);
+
+        //With url in intent, we create the WebView
 
         String url = getIntent().getStringExtra("URL");
         WebView myWebView = findViewById(R.id.webview);

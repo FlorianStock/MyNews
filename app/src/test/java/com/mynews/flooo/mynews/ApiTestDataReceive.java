@@ -11,9 +11,9 @@ import static org.junit.Assert.fail;
 
 
 /**
- * Example local unit test, which will execute on the development machine (host).
+ * Test the API if we have a response
  *
- * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
+ *
  */
 
 
@@ -22,12 +22,11 @@ public class ApiTestDataReceive implements ApiCalls.Callbacks
 {
 
 
-    // We test the requests of the API, if we have results.
 
     @Before
     public void setUp() throws Exception
     {
-        //.MockitoAnnotations.initMocks(this);
+
 
     }
 

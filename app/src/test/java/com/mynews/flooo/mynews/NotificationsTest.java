@@ -24,12 +24,14 @@ import java.util.Date;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.mock;
 
+/**
+ * Test my Notifications class with real list, and list empty
+ *
+ *
+ */
+
 public class NotificationsTest implements ApiCalls.Callbacks
 {
-
-
-    // We test if the notification have been create with request of api, and with a list Empty.
-
 
     @Mock Context context;
     @Mock AlarmNotifications alarmNotifications;

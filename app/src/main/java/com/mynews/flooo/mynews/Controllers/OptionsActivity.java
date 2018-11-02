@@ -198,12 +198,7 @@ public class OptionsActivity extends AppCompatActivity implements CheckBox.OnChe
                 }
         });
     }
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu)
-    {
-        //getMenuInflater().inflate(R.menu.action_bar, menu);
-        return true;
-    }
+
 
     @Override
     public boolean onSupportNavigateUp()
@@ -216,6 +211,9 @@ public class OptionsActivity extends AppCompatActivity implements CheckBox.OnChe
         }
         return true;
     }
+
+
+    //When the user click on checkbox
 
     @Override
     public void onCheckedChanged(CompoundButton compoundButton, boolean b)

@@ -1,14 +1,13 @@
 package com.mynews.flooo.mynews.Models;
 
 
-
+//This is my "news model" who contains informations of news
 
 import java.util.ArrayList;
 
 public class News extends ArrayList<FormatDataImage>
 {
 
-    // This class is the model for any news, with the elements what we need
 
     private String section;
     private String subsection;

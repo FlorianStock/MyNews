@@ -3,8 +3,7 @@ package com.mynews.flooo.mynews.Models;
 public class FormatDataImage
 {
 
-    // The news extends FormatDatImage for a second list for the images
-
+    //This is the images format to show the image.
 
     private String url;
     private String format;
